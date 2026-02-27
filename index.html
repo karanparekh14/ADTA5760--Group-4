@@ -3,556 +3,1101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADTA 5770 Group 4 | Knowledge Base Contamination</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+    <title>ADTA 5770 Group 4 | Contaminated Knowledge Base</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #202124;
+            --text-muted: #5f6368;
+            --border: #dadce0;
+            --accent-sc: #1a73e8;
+            --accent-med: #d93025;
+            --accent-sc-light: #e8f0fe;
+            --accent-med-light: #fce8e6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a73e8 0%, #6c5ce7 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin: 15px 5px 0;
+            font-size: 0.95rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section-header .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .section-header .icon.sc { background: var(--accent-sc-light); }
+        .section-header .icon.med { background: var(--accent-med-light); }
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .section-header .count {
+            margin-left: auto;
+            background: var(--bg);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        thead {
+            background: var(--bg);
+        }
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+        td {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        td:first-child {
+            width: 50px;
+            text-align: center;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        td:last-child {
+            width: 100px;
+            text-align: center;
+        }
+        tbody tr:hover {
+            background: #f1f3f4;
+        }
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn-view {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: var(--primary);
+            color: white !important;
+            text-decoration: none !important;
+            transition: background 0.2s;
+        }
+        .btn-view:hover {
+            background: var(--primary-dark);
+        }
+        .search-box {
+            margin-bottom: 16px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+        .team {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .team h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .member {
+            padding: 12px 24px;
+            background: var(--bg);
+            border-radius: 10px;
+        }
+        .member .name { font-weight: 600; }
+        .member .role { color: var(--text-muted); font-size: 0.85rem; }
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .header p { font-size: 1rem; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            td, th { padding: 8px 10px; font-size: 0.85rem; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <span class="logo-icon">🧠</span>
-                <span class="logo-text">Group 4</span>
-            </a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#research" class="nav-link">Contamination</a></li>
-                <li><a href="#methodology" class="nav-link">Pipeline</a></li>
-                <li><a href="#results" class="nav-link">Results</a></li>
-                <li><a href="#team" class="nav-link">Team</a></li>
-            </ul>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-bg">
-            <div class="hero-particles" id="particles"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-badge">ADTA 5770 &middot; Spring 2026 &middot; UNT</div>
-            <h1 class="hero-title">
-                Knowledge Base<br>
-                <span class="gradient-text">Contamination &amp; RAG Pipeline</span>
-            </h1>
-            <p class="hero-subtitle">
-                By-design contamination of <strong>150 PDF documents</strong> across 
-                <strong>Supply Chain</strong> and <strong>Medical</strong> knowledge bases 
-                to study RAG pipeline robustness.
-            </p>
-            <div class="hero-actions">
-                <a href="#research" class="btn btn-primary">View Methodology</a>
-                <a href="#team" class="btn btn-outline">Meet the Team</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">150</span>
-                    <span class="stat-label">PDFs Contaminated</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">443</span>
-                    <span class="stat-label">Contaminants Injected</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Contamination Types</span>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
+<div class="header">
+    <h1>ADTA 5770 &mdash; Group 4</h1>
+    <p>Contaminated Knowledge Base for LLM Testing</p>
+    <div>
+        <span class="badge">150 Documents</span>
+        <span class="badge">443 Contaminants</span>
+        <span class="badge">3 Types</span>
+    </div>
+</div>
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Overview</span>
-                <h2 class="section-title">About the Project</h2>
-                <p class="section-desc">
-                    HW2 for ADTA 5770 involves constructing two domain-specific knowledge bases and
-                    deliberately contaminating each PDF document with by-design errors to study the
-                    impact on downstream Retrieval-Augmented Generation (RAG) pipelines.
-                </p>
-            </div>
-            <div class="about-grid">
-                <div class="about-card">
-                    <div class="about-icon">📦</div>
-                    <h3>Supply Chain Knowledge Base</h3>
-                    <p>
-                        100 PDF documents covering supply chain management, logistics, procurement,
-                        inventory optimization, and risk management. Each document was contaminated
-                        with 3 by-design errors targeting domain-specific terminology.
-                    </p>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon">🏥</div>
-                    <h3>Medical Knowledge Base</h3>
-                    <p>
-                        50 PDF documents spanning clinical research, medical literature, pharmacology,
-                        and healthcare management. Contaminations were carefully placed to introduce
-                        plausible but incorrect medical information.
-                    </p>
-                </div>
-                <div class="about-card full-width">
-                    <div class="about-icon">🎯</div>
-                    <h3>Project Objectives</h3>
-                    <ul class="objectives-list">
-                        <li>Collect 150 domain-specific PDF documents across supply chain and medical fields</li>
-                        <li>Apply 3 types of by-design contamination per document: Typo, Conflicting, and Nonsense</li>
-                        <li>Use in-place PDF text replacement to contaminate at randomly selected locations</li>
-                        <li>Document every contaminant with ID, type, original text, replacement, and exact location</li>
-                        <li>Study how contaminated knowledge bases affect RAG pipeline answer quality</li>
-                    </ul>
-                </div>
-            </div>
+<div class="container">
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="number">100</div>
+            <div class="label">Supply Chain PDFs</div>
         </div>
-    </section>
-
-    <!-- Research Section -->
-    <section class="section section-alt" id="research">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Contamination</span>
-                <h2 class="section-title">Contamination Types</h2>
-                <p class="section-desc">
-                    Three distinct contamination strategies were applied across both knowledge bases,
-                    each targeting a different type of error that could mislead a RAG system.
-                </p>
-            </div>
-            <div class="research-tabs">
-                <button class="tab-btn active" data-tab="supply-chain">🔤 Typo</button>
-                <button class="tab-btn" data-tab="medical">⚡ Conflicting</button>
-                <button class="tab-btn" data-tab="nonsense-tab">🌀 Nonsense</button>
-            </div>
-            <div class="research-content">
-                <div class="tab-panel active" id="supply-chain">
-                    <div class="research-detail">
-                        <div class="research-text">
-                            <h3>Typo Contamination</h3>
-                            <p>
-                                Deliberate misspellings of domain-specific technical terms — subtle enough
-                                to appear like human error, yet capable of disrupting keyword-based retrieval
-                                and confusing language models during answer generation.
-                            </p>
-                            <div class="research-highlights">
-                                <div class="highlight">
-                                    <span class="highlight-label">Count</span>
-                                    <span class="highlight-value">149 injected</span>
-                                </div>
-                                <div class="highlight">
-                                    <span class="highlight-label">Examples</span>
-                                    <span class="highlight-value">methodology → methodolgy</span>
-                                </div>
-                                <div class="highlight">
-                                    <span class="highlight-label">Impact</span>
-                                    <span class="highlight-value">Retrieval noise</span>
-                                </div>
-                            </div>
-                            <h4>Approach</h4>
-                            <ul>
-                                <li>50+ term typo map covering both supply chain and medical vocabulary</li>
-                                <li>Applied at randomly selected pages — one per document</li>
-                                <li>In-place PDF replacement using PyMuPDF TextWriter with font matching</li>
-                                <li>Original text visually replaced; no visible strikethrough or markup</li>
-                            </ul>
-                        </div>
-                        <div class="research-visual">
-                            <div class="chart-placeholder" id="chart-supply">
-                                <div class="chart-title">Typo Distribution by Domain</div>
-                                <div class="bar-chart">
-                                    <div class="bar-item">
-                                        <span class="bar-label">Supply Chain</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 67%"><span>~100</span></div></div>
-                                    </div>
-                                    <div class="bar-item">
-                                        <span class="bar-label">Medical</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 33%"><span>~49</span></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-panel" id="medical">
-                    <div class="research-detail">
-                        <div class="research-text">
-                            <h3>Conflicting Information</h3>
-                            <p>
-                                Substitution of accurate domain terms with plausible but factually incorrect
-                                alternatives — for example replacing a correct technical concept with a
-                                contradictory one. These are the most dangerous contaminants for RAG pipelines.
-                            </p>
-                            <div class="research-highlights">
-                                <div class="highlight">
-                                    <span class="highlight-label">Count</span>
-                                    <span class="highlight-value">147 injected</span>
-                                </div>
-                                <div class="highlight">
-                                    <span class="highlight-label">Examples</span>
-                                    <span class="highlight-value">effective → ineffective</span>
-                                </div>
-                                <div class="highlight">
-                                    <span class="highlight-label">Impact</span>
-                                    <span class="highlight-value">Factual errors in answers</span>
-                                </div>
-                            </div>
-                            <h4>Approach</h4>
-                            <ul>
-                                <li>~40 antonym/conflicting pairs across both knowledge base domains</li>
-                                <li>Targets high-signal words (increase/decrease, effective/ineffective, etc.)</li>
-                                <li>Applied on a different page than the typo contamination per document</li>
-                                <li>Designed to produce confidently wrong RAG responses</li>
-                            </ul>
-                        </div>
-                        <div class="research-visual">
-                            <div class="chart-placeholder" id="chart-medical">
-                                <div class="chart-title">Conflicting Distribution by Domain</div>
-                                <div class="bar-chart">
-                                    <div class="bar-item">
-                                        <span class="bar-label">Supply Chain</span>
-                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 67%"><span>~98</span></div></div>
-                                    </div>
-                                    <div class="bar-item">
-                                        <span class="bar-label">Medical</span>
-                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 33%"><span>~49</span></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-panel" id="nonsense-tab">
-                    <div class="research-detail">
-                        <div class="research-text">
-                            <h3>Nonsense / Absurd Replacement</h3>
-                            <p>
-                                Replacement of meaningful domain terms with completely unrelated, absurd
-                                phrases — such as replacing &ldquo;supply chain&rdquo; with &ldquo;dolphin choir&rdquo;.
-                                These are the most detectable but test whether RAG systems flag incoherent passages.
-                            </p>
-                            <div class="research-highlights">
-                                <div class="highlight">
-                                    <span class="highlight-label">Count</span>
-                                    <span class="highlight-value">147 injected</span>
-                                </div>
-                                <div class="highlight">
-                                    <span class="highlight-label">Examples</span>
-                                    <span class="highlight-value">supply chain → dolphin choir</span>
-                                </div>
-                                <div class="highlight">
-                                    <span class="highlight-label">Impact</span>
-                                    <span class="highlight-value">Incoherent retrieved context</span>
-                                </div>
-                            </div>
-                            <h4>Approach</h4>
-                            <ul>
-                                <li>~35 absurd replacement pairs targeting key domain phrases</li>
-                                <li>Replacements are semantically unrelated and phonetically distinct</li>
-                                <li>Applied on a third unique page per document</li>
-                                <li>Tests whether LLMs hallucinate explanations for nonsense context</li>
-                            </ul>
-                        </div>
-                        <div class="research-visual">
-                            <div class="chart-placeholder" id="chart-nonsense">
-                                <div class="chart-title">Nonsense Distribution by Domain</div>
-                                <div class="bar-chart">
-                                    <div class="bar-item">
-                                        <span class="bar-label">Supply Chain</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 67%"><span>~98</span></div></div>
-                                    </div>
-                                    <div class="bar-item">
-                                        <span class="bar-label">Medical</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 33%"><span>~49</span></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="stat-card">
+            <div class="number">50</div>
+            <div class="label">Medical PDFs</div>
         </div>
-    </section>
-
-    <!-- Methodology Section -->
-    <section class="section" id="methodology">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Pipeline</span>
-                <h2 class="section-title">Contamination Pipeline</h2>
-                <p class="section-desc">
-                    End-to-end automated pipeline for building and contaminating domain-specific knowledge bases.
-                </p>
-            </div>
-            <div class="pipeline">
-                <div class="pipeline-step">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h4>Document Collection</h4>
-                        <p>Curated 150 PDF documents: 100 supply chain (logistics, procurement, inventory, risk) and 50 medical (clinical, pharmacology, healthcare management).</p>
-                    </div>
-                </div>
-                <div class="pipeline-connector"></div>
-                <div class="pipeline-step">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h4>Contamination Mapping</h4>
-                        <p>Built domain-specific word maps: 50+ typo pairs, ~40 conflicting pairs, ~35 nonsense pairs — covering terminology from both supply chain and medical domains.</p>
-                    </div>
-                </div>
-                <div class="pipeline-connector"></div>
-                <div class="pipeline-step">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h4>Font Extraction &amp; Matching</h4>
-                        <p>Each PDF's existing fonts are extracted using PyMuPDF. Replacement text is rendered using the exact same font, size, and position as the original text.</p>
-                    </div>
-                </div>
-                <div class="pipeline-connector"></div>
-                <div class="pipeline-step">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h4>In-Place PDF Replacement</h4>
-                        <p>Original text is redacted using a white rectangle overlay, then the replacement text is drawn in-place with PyMuPDF TextWriter — visually seamless, no annotations.</p>
-                    </div>
-                </div>
-                <div class="pipeline-connector"></div>
-                <div class="pipeline-step">
-                    <div class="step-number">05</div>
-                    <div class="step-content">
-                        <h4>Documentation &amp; Verification</h4>
-                        <p>Every contaminant logged with document ID, contaminant ID, type, original text, replacement, context snippet, and exact page coordinates. Exported as TXT, CSV, and Excel.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tech-stack">
-                <h3>Technology Stack</h3>
-                <div class="tech-grid">
-                    <div class="tech-item">
-                        <span class="tech-name">Python 3.12</span>
-                        <span class="tech-desc">Core Language</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">PyMuPDF</span>
-                        <span class="tech-desc">PDF Manipulation</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">TextWriter</span>
-                        <span class="tech-desc">Font-matched Insert</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">openpyxl</span>
-                        <span class="tech-desc">Excel Reports</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">GCP</span>
-                        <span class="tech-desc">Cloud Platform</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">OneDrive</span>
-                        <span class="tech-desc">File Sharing</span>
-                    </div>
-                </div>
-            </div>
+        <div class="stat-card">
+            <div class="number">443</div>
+            <div class="label">Total Contaminants</div>
         </div>
-    </section>
-
-    <!-- Results Section -->
-    <section class="section section-alt" id="results">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Results</span>
-                <h2 class="section-title">Contamination Results</h2>
-                <p class="section-desc">
-                    Summary of contaminants successfully injected across both knowledge bases.
-                </p>
-            </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-metric">
-                        <span class="metric-value" data-count="150">0</span>
-                        <span class="metric-unit"></span>
-                    </div>
-                    <h4>PDFs Contaminated</h4>
-                    <p>All 150 documents (100 supply chain + 50 medical) successfully processed with by-design in-place contaminations.</p>
-                </div>
-                <div class="result-card">
-                    <div class="result-metric">
-                        <span class="metric-value" data-count="443">0</span>
-                        <span class="metric-unit"></span>
-                    </div>
-                    <h4>Total Contaminants</h4>
-                    <p>443 out of 450 possible contaminants injected — 3 per document across Typo, Conflicting, and Nonsense types.</p>
-                </div>
-                <div class="result-card">
-                    <div class="result-metric">
-                        <span class="metric-value" data-count="3">0</span>
-                        <span class="metric-unit"></span>
-                    </div>
-                    <h4>Types per Document</h4>
-                    <p>Every document received one Typo, one Conflicting, and one Nonsense contaminant — each on a different page.</p>
-                </div>
-                <div class="result-card">
-                    <div class="result-metric">
-                        <span class="metric-value" data-count="100">0</span>
-                        <span class="metric-unit">%</span>
-                    </div>
-                    <h4>Visual Fidelity</h4>
-                    <p>All replacements are visually seamless — font-matched, same size and position as original text, undetectable by eye.</p>
-                </div>
-            </div>
-
-            <div class="insights-section">
-                <h3>Key Findings</h3>
-                <div class="insights-grid">
-                    <div class="insight">
-                        <span class="insight-num">1</span>
-                        <div>
-                            <h4>Multi-word Phrases Are Tricky</h4>
-                            <p>Phrases like &ldquo;supply chain&rdquo; spanning line breaks in PDFs require per-word rect validation — naive redaction creates overlapping text artifacts.</p>
-                        </div>
-                    </div>
-                    <div class="insight">
-                        <span class="insight-num">2</span>
-                        <div>
-                            <h4>Font Extraction is Key</h4>
-                            <p>84% of replacements used the document's own embedded fonts via PyMuPDF, ensuring the contaminated text is visually indistinguishable from the original.</p>
-                        </div>
-                    </div>
-                    <div class="insight">
-                        <span class="insight-num">3</span>
-                        <div>
-                            <h4>Conflicting Errors Are Most Dangerous</h4>
-                            <p>Substitutions like &ldquo;effective&rdquo; → &ldquo;ineffective&rdquo; are the hardest to detect and most likely to cause RAG systems to generate confidently wrong answers.</p>
-                        </div>
-                    </div>
-                    <div class="insight">
-                        <span class="insight-num">4</span>
-                        <div>
-                            <h4>Automated Documentation</h4>
-                            <p>All 443 contaminants are fully documented with exact page coordinates, context snippets, and contaminant IDs — exported as TXT, CSV, and Excel.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="stat-card">
+            <div class="number">3</div>
+            <div class="label">Contamination Types</div>
         </div>
-    </section>
+    </div>
+
+    <!-- Supply Chain Section -->
+    <div class="section" id="supply-chain">
+        <div class="section-header">
+            <div class="icon sc">&#128230;</div>
+            <h2>Supply Chain Knowledge Base</h2>
+            <span class="count">100 documents</span>
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-sc" placeholder="Search supply chain documents..." onkeyup="filterTable('sc-table', this.value)">
+        </div>
+        <table id="sc-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Document Title</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><a href="pdfs/supply_chain/A%20Literature%20Analysis%20of%20Walmart%27s%20Supply%20Chain%20Excellence%20in%20terms%20of%20Integration%2C%20Distribution%20and%20Operations.pdf" target="_blank">A Literature Analysis of Walmart&#x27;s Supply Chain Excellence in terms of Integration, Distribution and Operations</a></td>
+                    <td><a href="pdfs/supply_chain/A%20Literature%20Analysis%20of%20Walmart%27s%20Supply%20Chain%20Excellence%20in%20terms%20of%20Integration%2C%20Distribution%20and%20Operations.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><a href="pdfs/supply_chain/A%20Review%20of%20Supply%20Chain%20Risk%20Management%20-%20Definition%2C%20Theory%2C%20and%20Research%20Agenda.pdf" target="_blank">A Review of Supply Chain Risk Management - Definition, Theory, and Research Agenda</a></td>
+                    <td><a href="pdfs/supply_chain/A%20Review%20of%20Supply%20Chain%20Risk%20Management%20-%20Definition%2C%20Theory%2C%20and%20Research%20Agenda.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a href="pdfs/supply_chain/Agility%20and%20Resilience%20in%20Supply%20Chains%20Enhancing%20Financial%20Performance.pdf" target="_blank">Agility and Resilience in Supply Chains Enhancing Financial Performance</a></td>
+                    <td><a href="pdfs/supply_chain/Agility%20and%20Resilience%20in%20Supply%20Chains%20Enhancing%20Financial%20Performance.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><a href="pdfs/supply_chain/Artificial%20intelligence%20in%20supply%20chain%20management%20-%20A%20systematic%20literature.pdf" target="_blank">Artificial intelligence in supply chain management - A systematic literature</a></td>
+                    <td><a href="pdfs/supply_chain/Artificial%20intelligence%20in%20supply%20chain%20management%20-%20A%20systematic%20literature.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><a href="pdfs/supply_chain/Asymmetric%20Inventory%20Management.pdf" target="_blank">Asymmetric Inventory Management</a></td>
+                    <td><a href="pdfs/supply_chain/Asymmetric%20Inventory%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><a href="pdfs/supply_chain/Building%20a%20Resilient%20Supply%20Chain%20-%20Strategic%20Guide%20for%20Businesses.pdf" target="_blank">Building a Resilient Supply Chain - Strategic Guide for Businesses</a></td>
+                    <td><a href="pdfs/supply_chain/Building%20a%20Resilient%20Supply%20Chain%20-%20Strategic%20Guide%20for%20Businesses.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><a href="pdfs/supply_chain/Comprehensive%20Supply%20Chain%20Risk%20Management%20Strategy.pdf" target="_blank">Comprehensive Supply Chain Risk Management Strategy</a></td>
+                    <td><a href="pdfs/supply_chain/Comprehensive%20Supply%20Chain%20Risk%20Management%20Strategy.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><a href="pdfs/supply_chain/Contemporary%20Challenges%20in%20Logistics%20and%20Supply%20Chain%20Management%20.pdf" target="_blank">Contemporary Challenges in Logistics and Supply Chain Management </a></td>
+                    <td><a href="pdfs/supply_chain/Contemporary%20Challenges%20in%20Logistics%20and%20Supply%20Chain%20Management%20.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><a href="pdfs/supply_chain/Contemporary%20Challenges%20in%20Logistics%20and%20Supply%20Chain%20Management.pdf" target="_blank">Contemporary Challenges in Logistics and Supply Chain Management</a></td>
+                    <td><a href="pdfs/supply_chain/Contemporary%20Challenges%20in%20Logistics%20and%20Supply%20Chain%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><a href="pdfs/supply_chain/Contingency%20Management%20and%20Supply%20Chain%20Performance%20COVID-19%20Pandemic.pdf" target="_blank">Contingency Management and Supply Chain Performance COVID-19 Pandemic</a></td>
+                    <td><a href="pdfs/supply_chain/Contingency%20Management%20and%20Supply%20Chain%20Performance%20COVID-19%20Pandemic.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><a href="pdfs/supply_chain/Design-Based%20Supply%20Chain%20Operations%20Research%20Model%20-%20Fostering%20Resilience%20And%20Sustainability.pdf" target="_blank">Design-Based Supply Chain Operations Research Model - Fostering Resilience And Sustainability</a></td>
+                    <td><a href="pdfs/supply_chain/Design-Based%20Supply%20Chain%20Operations%20Research%20Model%20-%20Fostering%20Resilience%20And%20Sustainability.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><a href="pdfs/supply_chain/Developments%20in%20Logistics%20and%20Supply%20Chain%20Management%20Past%2C%20Present%20and%20Future.pdf" target="_blank">Developments in Logistics and Supply Chain Management Past, Present and Future</a></td>
+                    <td><a href="pdfs/supply_chain/Developments%20in%20Logistics%20and%20Supply%20Chain%20Management%20Past%2C%20Present%20and%20Future.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td><a href="pdfs/supply_chain/Digital%20Sustainable%20Supply%20Chain%20Competitiveness%20under%20Uncertainties.pdf" target="_blank">Digital Sustainable Supply Chain Competitiveness under Uncertainties</a></td>
+                    <td><a href="pdfs/supply_chain/Digital%20Sustainable%20Supply%20Chain%20Competitiveness%20under%20Uncertainties.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td><a href="pdfs/supply_chain/Digital%20Transformation%20and%20Supply%20Chain%20Resilience%20-%20Post-Pandemic%20Analysis.pdf" target="_blank">Digital Transformation and Supply Chain Resilience - Post-Pandemic Analysis</a></td>
+                    <td><a href="pdfs/supply_chain/Digital%20Transformation%20and%20Supply%20Chain%20Resilience%20-%20Post-Pandemic%20Analysis.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td><a href="pdfs/supply_chain/Digital%20Transformation%20as%20a%20Driver%20of%20Supply%20Chain%20Performance%20%E2%80%93%20An%20MSc%20Perspective.pdf" target="_blank">Digital Transformation as a Driver of Supply Chain Performance – An MSc Perspective</a></td>
+                    <td><a href="pdfs/supply_chain/Digital%20Transformation%20as%20a%20Driver%20of%20Supply%20Chain%20Performance%20%E2%80%93%20An%20MSc%20Perspective.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td><a href="pdfs/supply_chain/Digital%20Transformation%20in%20Supply%20Chains%20AI%2C%20Blockchain%20and%20IoT%20Integration.pdf" target="_blank">Digital Transformation in Supply Chains AI, Blockchain and IoT Integration</a></td>
+                    <td><a href="pdfs/supply_chain/Digital%20Transformation%20in%20Supply%20Chains%20AI%2C%20Blockchain%20and%20IoT%20Integration.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td><a href="pdfs/supply_chain/Enabling%20Global%20Sourcing%20in%20Supply%20Chain%20During%20Challenging%20Times.pdf" target="_blank">Enabling Global Sourcing in Supply Chain During Challenging Times</a></td>
+                    <td><a href="pdfs/supply_chain/Enabling%20Global%20Sourcing%20in%20Supply%20Chain%20During%20Challenging%20Times.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td><a href="pdfs/supply_chain/Enhancing%20supply%20chain%20management%20with%20deep%20learning%20and%20machine%20learning%20techniques%20-%20A%20review.pdf" target="_blank">Enhancing supply chain management with deep learning and machine learning techniques - A review</a></td>
+                    <td><a href="pdfs/supply_chain/Enhancing%20supply%20chain%20management%20with%20deep%20learning%20and%20machine%20learning%20techniques%20-%20A%20review.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td><a href="pdfs/supply_chain/Evaluation%20of%20Current%20Technology%20in%20Supply%20Chain%20Management%20Systems.pdf" target="_blank">Evaluation of Current Technology in Supply Chain Management Systems</a></td>
+                    <td><a href="pdfs/supply_chain/Evaluation%20of%20Current%20Technology%20in%20Supply%20Chain%20Management%20Systems.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td><a href="pdfs/supply_chain/Four%20Fundamentals%20of%20Supply%20Chain%20Management.pdf" target="_blank">Four Fundamentals of Supply Chain Management</a></td>
+                    <td><a href="pdfs/supply_chain/Four%20Fundamentals%20of%20Supply%20Chain%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td><a href="pdfs/supply_chain/Fundamentals%20of%20Supply%20Chain%20Management%20-%20Core%20Concepts%20and%20Principles.pdf" target="_blank">Fundamentals of Supply Chain Management - Core Concepts and Principles</a></td>
+                    <td><a href="pdfs/supply_chain/Fundamentals%20of%20Supply%20Chain%20Management%20-%20Core%20Concepts%20and%20Principles.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td><a href="pdfs/supply_chain/Global%20Procurement%20Manual%20-%20%20Best%20Practices%20and%20Standards.pdf" target="_blank">Global Procurement Manual -  Best Practices and Standards</a></td>
+                    <td><a href="pdfs/supply_chain/Global%20Procurement%20Manual%20-%20%20Best%20Practices%20and%20Standards.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td><a href="pdfs/supply_chain/Global%20Purchasing%20and%20Supply%20Management.pdf" target="_blank">Global Purchasing and Supply Management</a></td>
+                    <td><a href="pdfs/supply_chain/Global%20Purchasing%20and%20Supply%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td><a href="pdfs/supply_chain/Global%20Sourcing%20And%20Procurement%20Strategy%20Framework%20and%20Implementation.pdf" target="_blank">Global Sourcing And Procurement Strategy Framework and Implementation</a></td>
+                    <td><a href="pdfs/supply_chain/Global%20Sourcing%20And%20Procurement%20Strategy%20Framework%20and%20Implementation.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td><a href="pdfs/supply_chain/Global%20Sourcing%20in%20Procurement%20Management-%20International%20Strategies%20.pdf" target="_blank">Global Sourcing in Procurement Management- International Strategies </a></td>
+                    <td><a href="pdfs/supply_chain/Global%20Sourcing%20in%20Procurement%20Management-%20International%20Strategies%20.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td><a href="pdfs/supply_chain/Global%20Supply%20Chain%20Management%20-%20Automotive%20Industry.pdf" target="_blank">Global Supply Chain Management - Automotive Industry</a></td>
+                    <td><a href="pdfs/supply_chain/Global%20Supply%20Chain%20Management%20-%20Automotive%20Industry.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td><a href="pdfs/supply_chain/Global%20Supply%20Chain%20Strategy.pdf" target="_blank">Global Supply Chain Strategy</a></td>
+                    <td><a href="pdfs/supply_chain/Global%20Supply%20Chain%20Strategy.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td><a href="pdfs/supply_chain/Green%20Logistics%20Practices%20and%20Their%20Impact%20on%20Environmental%20Sustainability.pdf" target="_blank">Green Logistics Practices and Their Impact on Environmental Sustainability</a></td>
+                    <td><a href="pdfs/supply_chain/Green%20Logistics%20Practices%20and%20Their%20Impact%20on%20Environmental%20Sustainability.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td><a href="pdfs/supply_chain/Impact%20of%20Perceived%20Benefits%20on%20Blockchain%20Adoption%20in%20SCM.pdf" target="_blank">Impact of Perceived Benefits on Blockchain Adoption in SCM</a></td>
+                    <td><a href="pdfs/supply_chain/Impact%20of%20Perceived%20Benefits%20on%20Blockchain%20Adoption%20in%20SCM.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td><a href="pdfs/supply_chain/Impact%20of%20inventory%20management.pdf" target="_blank">Impact of inventory management</a></td>
+                    <td><a href="pdfs/supply_chain/Impact%20of%20inventory%20management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td><a href="pdfs/supply_chain/Incentives%20in%20Inventory%20Management.pdf" target="_blank">Incentives in Inventory Management</a></td>
+                    <td><a href="pdfs/supply_chain/Incentives%20in%20Inventory%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td><a href="pdfs/supply_chain/Industrial%20Procurement%20Management%20Efficiency%20Guidelines%20and%20Best%20Practices.pdf" target="_blank">Industrial Procurement Management Efficiency Guidelines and Best Practices</a></td>
+                    <td><a href="pdfs/supply_chain/Industrial%20Procurement%20Management%20Efficiency%20Guidelines%20and%20Best%20Practices.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td><a href="pdfs/supply_chain/Insights%20of%20Strategic%20Approach%20to%20Global%20Sourcing%20and%20Modes%20of%20Entry.pdf" target="_blank">Insights of Strategic Approach to Global Sourcing and Modes of Entry</a></td>
+                    <td><a href="pdfs/supply_chain/Insights%20of%20Strategic%20Approach%20to%20Global%20Sourcing%20and%20Modes%20of%20Entry.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td><a href="pdfs/supply_chain/International%20Journal%20of%20Supply%20and%20Operations%20Management%20-%20Research%20Compilation.pdf" target="_blank">International Journal of Supply and Operations Management - Research Compilation</a></td>
+                    <td><a href="pdfs/supply_chain/International%20Journal%20of%20Supply%20and%20Operations%20Management%20-%20Research%20Compilation.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td><a href="pdfs/supply_chain/International%20Procurement%20Module%201%20Basics%20and%20Fundamentals.pdf" target="_blank">International Procurement Module 1 Basics and Fundamentals</a></td>
+                    <td><a href="pdfs/supply_chain/International%20Procurement%20Module%201%20Basics%20and%20Fundamentals.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td><a href="pdfs/supply_chain/International%20Procurement%20Practices%20and%20Supply%20Chain%20Performance.pdf" target="_blank">International Procurement Practices and Supply Chain Performance</a></td>
+                    <td><a href="pdfs/supply_chain/International%20Procurement%20Practices%20and%20Supply%20Chain%20Performance.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Management%20Optimization.pdf" target="_blank">Inventory Management Optimization</a></td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Management%20Optimization.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Management%20Strategies%20to%20Enhance%20Resilience%20in%20Automotive%20Industry.pdf" target="_blank">Inventory Management Strategies to Enhance Resilience in Automotive Industry</a></td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Management%20Strategies%20to%20Enhance%20Resilience%20in%20Automotive%20Industry.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Management%20as%20a%20Key%20Driver%20of%20Sustainability.pdf" target="_blank">Inventory Management as a Key Driver of Sustainability</a></td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Management%20as%20a%20Key%20Driver%20of%20Sustainability.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Optimization%20and%20Demand%20Forecasting%20-%20Balancing%20Stock%20Levels%20and%20Service.pdf" target="_blank">Inventory Optimization and Demand Forecasting - Balancing Stock Levels and Service</a></td>
+                    <td><a href="pdfs/supply_chain/Inventory%20Optimization%20and%20Demand%20Forecasting%20-%20Balancing%20Stock%20Levels%20and%20Service.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td><a href="pdfs/supply_chain/Inventory%20management%20optimization%20%20a%20case%20study%20of%20Amazon%20supply%20chain.pdf.pdf" target="_blank">Inventory management optimization  a case study of Amazon supply chain</a></td>
+                    <td><a href="pdfs/supply_chain/Inventory%20management%20optimization%20%20a%20case%20study%20of%20Amazon%20supply%20chain.pdf.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td><a href="pdfs/supply_chain/Issues%20in%20Supply%20Chain%20Management%20Contemporary%20Challenges.pdf" target="_blank">Issues in Supply Chain Management Contemporary Challenges</a></td>
+                    <td><a href="pdfs/supply_chain/Issues%20in%20Supply%20Chain%20Management%20Contemporary%20Challenges.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td><a href="pdfs/supply_chain/Large%20Language%20Models%20for%20Supply%20Chain%20Optimization.pdf" target="_blank">Large Language Models for Supply Chain Optimization</a></td>
+                    <td><a href="pdfs/supply_chain/Large%20Language%20Models%20for%20Supply%20Chain%20Optimization.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td><a href="pdfs/supply_chain/Logistics%20Warehouse%20Optimization-%20Proposal%20and%20Implementation%20.pdf" target="_blank">Logistics Warehouse Optimization- Proposal and Implementation </a></td>
+                    <td><a href="pdfs/supply_chain/Logistics%20Warehouse%20Optimization-%20Proposal%20and%20Implementation%20.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td><a href="pdfs/supply_chain/Logistics%20and%20Supply%20Chain%20Management%20%284th%20Edition%20Overview%29.pdf" target="_blank">Logistics and Supply Chain Management (4th Edition Overview)</a></td>
+                    <td><a href="pdfs/supply_chain/Logistics%20and%20Supply%20Chain%20Management%20%284th%20Edition%20Overview%29.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td><a href="pdfs/supply_chain/Logistics%20and%20Supply%20Chain%20Management%20Development-%20Past%2C%20Present%20and%20Future%20.pdf" target="_blank">Logistics and Supply Chain Management Development- Past, Present and Future </a></td>
+                    <td><a href="pdfs/supply_chain/Logistics%20and%20Supply%20Chain%20Management%20Development-%20Past%2C%20Present%20and%20Future%20.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td><a href="pdfs/supply_chain/Logistics%20and%20Warehousing%20Management.pdf" target="_blank">Logistics and Warehousing Management</a></td>
+                    <td><a href="pdfs/supply_chain/Logistics%20and%20Warehousing%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td><a href="pdfs/supply_chain/New-Generation%20Supply%20Chain%20-%20Digital%20Transformation%20Strategies.pdf" target="_blank">New-Generation Supply Chain - Digital Transformation Strategies</a></td>
+                    <td><a href="pdfs/supply_chain/New-Generation%20Supply%20Chain%20-%20Digital%20Transformation%20Strategies.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td><a href="pdfs/supply_chain/Optimization%20Approaches%20for%20Green%20Supply%20Chain%20Management.pdf" target="_blank">Optimization Approaches for Green Supply Chain Management</a></td>
+                    <td><a href="pdfs/supply_chain/Optimization%20Approaches%20for%20Green%20Supply%20Chain%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td><a href="pdfs/supply_chain/Optimizing%20Supply%20Chain%20Networks%20with%20Graph%20Neural%20Networks.pdf" target="_blank">Optimizing Supply Chain Networks with Graph Neural Networks</a></td>
+                    <td><a href="pdfs/supply_chain/Optimizing%20Supply%20Chain%20Networks%20with%20Graph%20Neural%20Networks.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>51</td>
+                    <td><a href="pdfs/supply_chain/Power%20in%20Sustainable%20Supply%20Chain%20Management%20-%20A%20Systematic%20Literature%20Review.pdf" target="_blank">Power in Sustainable Supply Chain Management - A Systematic Literature Review</a></td>
+                    <td><a href="pdfs/supply_chain/Power%20in%20Sustainable%20Supply%20Chain%20Management%20-%20A%20Systematic%20Literature%20Review.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>52</td>
+                    <td><a href="pdfs/supply_chain/Privacy-Preserving%20Blockchain%20Framework%20for%20Supply%20Chain%20Management.pdf" target="_blank">Privacy-Preserving Blockchain Framework for Supply Chain Management</a></td>
+                    <td><a href="pdfs/supply_chain/Privacy-Preserving%20Blockchain%20Framework%20for%20Supply%20Chain%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>53</td>
+                    <td><a href="pdfs/supply_chain/Procurement_Sourcing_and_Supply_Chain_Ma.pdf" target="_blank">Procurement_Sourcing_and_Supply_Chain_Ma</a></td>
+                    <td><a href="pdfs/supply_chain/Procurement_Sourcing_and_Supply_Chain_Ma.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>54</td>
+                    <td><a href="pdfs/supply_chain/Project%20Logistics%20Integrating%20Procurement%20and%20Construction%20Management.pdf" target="_blank">Project Logistics Integrating Procurement and Construction Management</a></td>
+                    <td><a href="pdfs/supply_chain/Project%20Logistics%20Integrating%20Procurement%20and%20Construction%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>55</td>
+                    <td><a href="pdfs/supply_chain/PwC%27s%202025%20Digital%20Trends%20in%20Operations%20Survey.pdf" target="_blank">PwC&#x27;s 2025 Digital Trends in Operations Survey</a></td>
+                    <td><a href="pdfs/supply_chain/PwC%27s%202025%20Digital%20Trends%20in%20Operations%20Survey.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>56</td>
+                    <td><a href="pdfs/supply_chain/Recovery%20Strategies%20for%20Public%20Health%20Supply%20Chains%20Post-COVID.pdf" target="_blank">Recovery Strategies for Public Health Supply Chains Post-COVID</a></td>
+                    <td><a href="pdfs/supply_chain/Recovery%20Strategies%20for%20Public%20Health%20Supply%20Chains%20Post-COVID.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>57</td>
+                    <td><a href="pdfs/supply_chain/Research%20of%20Logistics%20Coordination%20Level%20in%20Supply%20Chain%20Procurement%20%281%29.pdf" target="_blank">Research of Logistics Coordination Level in Supply Chain Procurement (1)</a></td>
+                    <td><a href="pdfs/supply_chain/Research%20of%20Logistics%20Coordination%20Level%20in%20Supply%20Chain%20Procurement%20%281%29.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>58</td>
+                    <td><a href="pdfs/supply_chain/Research%20of%20Logistics%20Coordination%20Level%20in%20Supply%20Chain%20Procurement.pdf" target="_blank">Research of Logistics Coordination Level in Supply Chain Procurement</a></td>
+                    <td><a href="pdfs/supply_chain/Research%20of%20Logistics%20Coordination%20Level%20in%20Supply%20Chain%20Procurement.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>59</td>
+                    <td><a href="pdfs/supply_chain/Research%20on%20Inventory%20Strategy%20for%20Maximizing%20Cost-Effectiveness%20in%20Supply%20Chain.pdf" target="_blank">Research on Inventory Strategy for Maximizing Cost-Effectiveness in Supply Chain</a></td>
+                    <td><a href="pdfs/supply_chain/Research%20on%20Inventory%20Strategy%20for%20Maximizing%20Cost-Effectiveness%20in%20Supply%20Chain.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>60</td>
+                    <td><a href="pdfs/supply_chain/Revolutionizing%20Supply%20Chain%20Management%20Emerging%20Trends%20and%20Strategies%20for%20the%20Future.pdf" target="_blank">Revolutionizing Supply Chain Management Emerging Trends and Strategies for the Future</a></td>
+                    <td><a href="pdfs/supply_chain/Revolutionizing%20Supply%20Chain%20Management%20Emerging%20Trends%20and%20Strategies%20for%20the%20Future.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>61</td>
+                    <td><a href="pdfs/supply_chain/Risk%20Management%20and%20Supplier%20Selection%20in%20Global%20Procurement.pdf" target="_blank">Risk Management and Supplier Selection in Global Procurement</a></td>
+                    <td><a href="pdfs/supply_chain/Risk%20Management%20and%20Supplier%20Selection%20in%20Global%20Procurement.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>62</td>
+                    <td><a href="pdfs/supply_chain/SCM%20Optimization%20and%20Prediction%20Model%20Based%20on%20Projected%20Stochastic%20Gradient.pdf" target="_blank">SCM Optimization and Prediction Model Based on Projected Stochastic Gradient</a></td>
+                    <td><a href="pdfs/supply_chain/SCM%20Optimization%20and%20Prediction%20Model%20Based%20on%20Projected%20Stochastic%20Gradient.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>63</td>
+                    <td><a href="pdfs/supply_chain/Spare%20Parts%20Inventory%20Management%20A%20Literature%20Review.pdf" target="_blank">Spare Parts Inventory Management A Literature Review</a></td>
+                    <td><a href="pdfs/supply_chain/Spare%20Parts%20Inventory%20Management%20A%20Literature%20Review.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>64</td>
+                    <td><a href="pdfs/supply_chain/State%20of%20Supply%20Chain%20Sustainability%202024%20-%20Annual%20Report.pdf" target="_blank">State of Supply Chain Sustainability 2024 - Annual Report</a></td>
+                    <td><a href="pdfs/supply_chain/State%20of%20Supply%20Chain%20Sustainability%202024%20-%20Annual%20Report.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>65</td>
+                    <td><a href="pdfs/supply_chain/State%20of%20Supply%20Chain%20Sustainability%202024%20Annual%20Report%20.pdf" target="_blank">State of Supply Chain Sustainability 2024 Annual Report </a></td>
+                    <td><a href="pdfs/supply_chain/State%20of%20Supply%20Chain%20Sustainability%202024%20Annual%20Report%20.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>66</td>
+                    <td><a href="pdfs/supply_chain/Strategic%20Approaches%20to%20Supply%20Chain%20Management.pdf" target="_blank">Strategic Approaches to Supply Chain Management</a></td>
+                    <td><a href="pdfs/supply_chain/Strategic%20Approaches%20to%20Supply%20Chain%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>67</td>
+                    <td><a href="pdfs/supply_chain/Strategic%20Procurement%20Management%20Comprehensive%20Lecture%20Notes.pdf" target="_blank">Strategic Procurement Management Comprehensive Lecture Notes</a></td>
+                    <td><a href="pdfs/supply_chain/Strategic%20Procurement%20Management%20Comprehensive%20Lecture%20Notes.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>68</td>
+                    <td><a href="pdfs/supply_chain/Strategic%20Supply%20Chain%20Management%20%28SSCM%29%20Developing%20Conceptual%20Framework%20and%20Research%20Propositions.pdf" target="_blank">Strategic Supply Chain Management (SSCM) Developing Conceptual Framework and Research Propositions</a></td>
+                    <td><a href="pdfs/supply_chain/Strategic%20Supply%20Chain%20Management%20%28SSCM%29%20Developing%20Conceptual%20Framework%20and%20Research%20Propositions.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>69</td>
+                    <td><a href="pdfs/supply_chain/Strategies%20to%20Mitigate%20Supply%20Chain%20Disruptions%20During%20COVID-19.pdf" target="_blank">Strategies to Mitigate Supply Chain Disruptions During COVID-19</a></td>
+                    <td><a href="pdfs/supply_chain/Strategies%20to%20Mitigate%20Supply%20Chain%20Disruptions%20During%20COVID-19.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>70</td>
+                    <td><a href="pdfs/supply_chain/Supplier%20Selection%20Strategy%20of%20Business%20Organization%20-%20Multi-Criteria%20Approach.pdf" target="_blank">Supplier Selection Strategy of Business Organization - Multi-Criteria Approach</a></td>
+                    <td><a href="pdfs/supply_chain/Supplier%20Selection%20Strategy%20of%20Business%20Organization%20-%20Multi-Criteria%20Approach.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>71</td>
+                    <td><a href="pdfs/supply_chain/Supplier%20Selection%20and%20Assessment%20-%20Impact%20on%20Business%20Performance.pdf" target="_blank">Supplier Selection and Assessment - Impact on Business Performance</a></td>
+                    <td><a href="pdfs/supply_chain/Supplier%20Selection%20and%20Assessment%20-%20Impact%20on%20Business%20Performance.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>72</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%204.0%20-%20New%20Generation%20of%20Supply%20Chain%20Management.pdf" target="_blank">Supply Chain 4.0 - New Generation of Supply Chain Management</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%204.0%20-%20New%20Generation%20of%20Supply%20Chain%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>73</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Inventory%20Management.pdf" target="_blank">Supply Chain Inventory Management</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Inventory%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>74</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20-Supplier%20Performance%20and%20Firm%20Performance.pdf" target="_blank">Supply Chain Management -Supplier Performance and Firm Performance</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20-Supplier%20Performance%20and%20Firm%20Performance.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>75</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20Challenges%20in%20Competitive%20World%20-%20Strategic%20Responses.pdf" target="_blank">Supply Chain Management Challenges in Competitive World - Strategic Responses</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20Challenges%20in%20Competitive%20World%20-%20Strategic%20Responses.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>76</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20International%20Journal.pdf" target="_blank">Supply Chain Management International Journal</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20International%20Journal.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>77</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20Strategies%20in%20Process%20Industries.pdf" target="_blank">Supply Chain Management Strategies in Process Industries</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20Strategies%20in%20Process%20Industries.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>78</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20in%20Oil%20and%20Gas%20Industry.pdf" target="_blank">Supply Chain Management in Oil and Gas Industry</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Management%20in%20Oil%20and%20Gas%20Industry.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>79</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Optimization%20via%20Generative%20Simulation%20and%20Iterative%20Decision-Making.pdf" target="_blank">Supply Chain Optimization via Generative Simulation and Iterative Decision-Making</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Optimization%20via%20Generative%20Simulation%20and%20Iterative%20Decision-Making.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>80</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Performance%20-%20Performance%20Measurements%20and%20Metrics.pdf" target="_blank">Supply Chain Performance - Performance Measurements and Metrics</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Performance%20-%20Performance%20Measurements%20and%20Metrics.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>81</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Replication%20Research%20-%20Methodological%20Study.pdf" target="_blank">Supply Chain Replication Research - Methodological Study</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Replication%20Research%20-%20Methodological%20Study.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>82</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Resilience%20-%20A%20Review%20from%20the%20Inventory%20Management%20Perspective.pdf" target="_blank">Supply Chain Resilience - A Review from the Inventory Management Perspective</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Resilience%20-%20A%20Review%20from%20the%20Inventory%20Management%20Perspective.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>83</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Resilience%20-%20A%20Strategic%20Imperative%20for%20Modern%20Business.pdf" target="_blank">Supply Chain Resilience - A Strategic Imperative for Modern Business</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Resilience%20-%20A%20Strategic%20Imperative%20for%20Modern%20Business.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>84</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Risk%20Management%20-%20Building%20Resilience%20and%20Flexibility.pdf" target="_blank">Supply Chain Risk Management - Building Resilience and Flexibility</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Risk%20Management%20-%20Building%20Resilience%20and%20Flexibility.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>85</td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Risk%20Management%20-%20Conceptualization%2C%20Framework%20and%20Planning%20Process.pdf" target="_blank">Supply Chain Risk Management - Conceptualization, Framework and Planning Process</a></td>
+                    <td><a href="pdfs/supply_chain/Supply%20Chain%20Risk%20Management%20-%20Conceptualization%2C%20Framework%20and%20Planning%20Process.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>86</td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20Operations%20and%20Green%20Logistics%20in%202025.pdf" target="_blank">Sustainable Operations and Green Logistics in 2025</a></td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20Operations%20and%20Green%20Logistics%20in%202025.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>87</td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20Procurement%20and%20Supply%20Chain%20Management%20-%20Environmental%20Compliance%20and%20Cost%20Reduction.pdf" target="_blank">Sustainable Procurement and Supply Chain Management - Environmental Compliance and Cost Reduction</a></td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20Procurement%20and%20Supply%20Chain%20Management%20-%20Environmental%20Compliance%20and%20Cost%20Reduction.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>88</td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20Supply%20Chain%20Management.pdf" target="_blank">Sustainable Supply Chain Management</a></td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20Supply%20Chain%20Management.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>89</td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20and%20Resilient%20Supply%20Chain%20Network%20Design%20under%20Disruption%20Risks.pdf" target="_blank">Sustainable and Resilient Supply Chain Network Design under Disruption Risks</a></td>
+                    <td><a href="pdfs/supply_chain/Sustainable%20and%20Resilient%20Supply%20Chain%20Network%20Design%20under%20Disruption%20Risks.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>90</td>
+                    <td><a href="pdfs/supply_chain/Systematic%20Review%20of%20Sustainable%20Supply%20Chain%20Network%20Design.pdf" target="_blank">Systematic Review of Sustainable Supply Chain Network Design</a></td>
+                    <td><a href="pdfs/supply_chain/Systematic%20Review%20of%20Sustainable%20Supply%20Chain%20Network%20Design.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>91</td>
+                    <td><a href="pdfs/supply_chain/The%20Essential%20Guide%20to%20Procurement%20Management%20Best%20Practices.pdf" target="_blank">The Essential Guide to Procurement Management Best Practices</a></td>
+                    <td><a href="pdfs/supply_chain/The%20Essential%20Guide%20to%20Procurement%20Management%20Best%20Practices.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>92</td>
+                    <td><a href="pdfs/supply_chain/The%20Impact%20of%20Supply%20Chain%20Structure.pdf" target="_blank">The Impact of Supply Chain Structure</a></td>
+                    <td><a href="pdfs/supply_chain/The%20Impact%20of%20Supply%20Chain%20Structure.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>93</td>
+                    <td><a href="pdfs/supply_chain/Top%2010%20Supply%20Chain%20Trends%202025%20-%20Industry%20Outlook.pdf" target="_blank">Top 10 Supply Chain Trends 2025 - Industry Outlook</a></td>
+                    <td><a href="pdfs/supply_chain/Top%2010%20Supply%20Chain%20Trends%202025%20-%20Industry%20Outlook.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>94</td>
+                    <td><a href="pdfs/supply_chain/Uncertain%20Supply%20Chain%20Management%20-%20Dealing%20with%20Variability%20and%20Risk.pdf" target="_blank">Uncertain Supply Chain Management - Dealing with Variability and Risk</a></td>
+                    <td><a href="pdfs/supply_chain/Uncertain%20Supply%20Chain%20Management%20-%20Dealing%20with%20Variability%20and%20Risk.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>95</td>
+                    <td><a href="pdfs/supply_chain/United%20Nations%20Procurement%20Manual%20-%20Official%20Guidelines.pdf" target="_blank">United Nations Procurement Manual - Official Guidelines</a></td>
+                    <td><a href="pdfs/supply_chain/United%20Nations%20Procurement%20Manual%20-%20Official%20Guidelines.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>96</td>
+                    <td><a href="pdfs/supply_chain/WMG%20Supply%20Chain%20Resilience%20Framework%20-%20Academic%20and%20Practical%20Approach.pdf" target="_blank">WMG Supply Chain Resilience Framework - Academic and Practical Approach</a></td>
+                    <td><a href="pdfs/supply_chain/WMG%20Supply%20Chain%20Resilience%20Framework%20-%20Academic%20and%20Practical%20Approach.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>97</td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20%26%20Distribution%20Science%20-%20Comprehensive%20Guide.pdf" target="_blank">Warehouse &amp; Distribution Science - Comprehensive Guide</a></td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20%26%20Distribution%20Science%20-%20Comprehensive%20Guide.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>98</td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20Management%20-%20Automation%2C%20Organization%20and%20Control.pdf" target="_blank">Warehouse Management - Automation, Organization and Control</a></td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20Management%20-%20Automation%2C%20Organization%20and%20Control.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>99</td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20Management%20Optimization%20Using%20Sorting-Based%20Slotting%20Strategy.pdf" target="_blank">Warehouse Management Optimization Using Sorting-Based Slotting Strategy</a></td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20Management%20Optimization%20Using%20Sorting-Based%20Slotting%20Strategy.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20Optimization%20BEDNAR%20-%20Technical%20Analysis%20and%20Implementation.pdf" target="_blank">Warehouse Optimization BEDNAR - Technical Analysis and Implementation</a></td>
+                    <td><a href="pdfs/supply_chain/Warehouse%20Optimization%20BEDNAR%20-%20Technical%20Analysis%20and%20Implementation.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Medical Section -->
+    <div class="section" id="medical">
+        <div class="section-header">
+            <div class="icon med">&#9764;</div>
+            <h2>Medical Knowledge Base</h2>
+            <span class="count">50 documents</span>
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-med" placeholder="Search medical documents..." onkeyup="filterTable('med-table', this.value)">
+        </div>
+        <table id="med-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Document Title</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><a href="pdfs/medical/Age-dependent%20gender%20differences%20of%20COVID-19%20in%20mainland%20China.pdf" target="_blank">Age-dependent gender differences of COVID-19 in mainland China</a></td>
+                    <td><a href="pdfs/medical/Age-dependent%20gender%20differences%20of%20COVID-19%20in%20mainland%20China.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><a href="pdfs/medical/An%20essential%20bifunctional%20enzyme%20in%20Mycobacterium%20tuberculosis.pdf" target="_blank">An essential bifunctional enzyme in Mycobacterium tuberculosis</a></td>
+                    <td><a href="pdfs/medical/An%20essential%20bifunctional%20enzyme%20in%20Mycobacterium%20tuberculosis.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a href="pdfs/medical/Bald%E2%80%99s%20eyesalve%20for%20the%20treatment%20of%20bacterial%20infections.pdf" target="_blank">Bald’s eyesalve for the treatment of bacterial infections</a></td>
+                    <td><a href="pdfs/medical/Bald%E2%80%99s%20eyesalve%20for%20the%20treatment%20of%20bacterial%20infections.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><a href="pdfs/medical/Cardiac%20Sympathetic%20Denervation%20for%20Refractory%20Ventricular%20Arrhythmias.pdf" target="_blank">Cardiac Sympathetic Denervation for Refractory Ventricular Arrhythmias</a></td>
+                    <td><a href="pdfs/medical/Cardiac%20Sympathetic%20Denervation%20for%20Refractory%20Ventricular%20Arrhythmias.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><a href="pdfs/medical/Clinicogenomic%20factors%20of%20biotherapy%20immunogenicity%20in%20autoimmune%20disease.pdf" target="_blank">Clinicogenomic factors of biotherapy immunogenicity in autoimmune disease</a></td>
+                    <td><a href="pdfs/medical/Clinicogenomic%20factors%20of%20biotherapy%20immunogenicity%20in%20autoimmune%20disease.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><a href="pdfs/medical/Creatine%20Supplementation%20Improves%20Phosphagen%20Energy%20Pathway%20During%20Supramaximal%20Effort.pdf" target="_blank">Creatine Supplementation Improves Phosphagen Energy Pathway During Supramaximal Effort</a></td>
+                    <td><a href="pdfs/medical/Creatine%20Supplementation%20Improves%20Phosphagen%20Energy%20Pathway%20During%20Supramaximal%20Effort.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><a href="pdfs/medical/DHA-Rich%20Supplements%20on%20Human%20Plasma%20Oxylipins.pdf" target="_blank">DHA-Rich Supplements on Human Plasma Oxylipins</a></td>
+                    <td><a href="pdfs/medical/DHA-Rich%20Supplements%20on%20Human%20Plasma%20Oxylipins.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><a href="pdfs/medical/DNA%20Nanostructures%20and%20DNA-Functionalized%20Nanoparticles%20for%20Cancer%20Theranostics.pdf" target="_blank">DNA Nanostructures and DNA-Functionalized Nanoparticles for Cancer Theranostics</a></td>
+                    <td><a href="pdfs/medical/DNA%20Nanostructures%20and%20DNA-Functionalized%20Nanoparticles%20for%20Cancer%20Theranostics.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><a href="pdfs/medical/Different%20doses%20of%20intravenous%20oxycodone%20and%20fentanyl.pdf" target="_blank">Different doses of intravenous oxycodone and fentanyl</a></td>
+                    <td><a href="pdfs/medical/Different%20doses%20of%20intravenous%20oxycodone%20and%20fentanyl.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><a href="pdfs/medical/Disseminated%20peritoneal%20leiomyomatosis.pdf" target="_blank">Disseminated peritoneal leiomyomatosis</a></td>
+                    <td><a href="pdfs/medical/Disseminated%20peritoneal%20leiomyomatosis.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><a href="pdfs/medical/Diversity%20of%20Xylodon%20raduloides%20complex%20through%20integrative%20taxonomy.pdf" target="_blank">Diversity of Xylodon raduloides complex through integrative taxonomy</a></td>
+                    <td><a href="pdfs/medical/Diversity%20of%20Xylodon%20raduloides%20complex%20through%20integrative%20taxonomy.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><a href="pdfs/medical/Dynamin-Related%20Protein%20That%20Contributes%20to%20Endocytosis%20and%20Peroxisome%20Fission.pdf" target="_blank">Dynamin-Related Protein That Contributes to Endocytosis and Peroxisome Fission</a></td>
+                    <td><a href="pdfs/medical/Dynamin-Related%20Protein%20That%20Contributes%20to%20Endocytosis%20and%20Peroxisome%20Fission.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td><a href="pdfs/medical/Effect%20of%20capped%20biparametric%20magnetic%20resonance%20imaging%20slots%20on%20weekly%20prostate%20cancer.pdf" target="_blank">Effect of capped biparametric magnetic resonance imaging slots on weekly prostate cancer</a></td>
+                    <td><a href="pdfs/medical/Effect%20of%20capped%20biparametric%20magnetic%20resonance%20imaging%20slots%20on%20weekly%20prostate%20cancer.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td><a href="pdfs/medical/Efficacy%20of%20Vitamin%20C%20Supplementation%20on%20Collagen%20Synthesis%20and%20Oxidative%20Stress.pdf" target="_blank">Efficacy of Vitamin C Supplementation on Collagen Synthesis and Oxidative Stress</a></td>
+                    <td><a href="pdfs/medical/Efficacy%20of%20Vitamin%20C%20Supplementation%20on%20Collagen%20Synthesis%20and%20Oxidative%20Stress.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td><a href="pdfs/medical/Electrophysiological%20Brain%20Connectivity.pdf" target="_blank">Electrophysiological Brain Connectivity</a></td>
+                    <td><a href="pdfs/medical/Electrophysiological%20Brain%20Connectivity.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td><a href="pdfs/medical/Engaged%20Physical%20Sciences%20and%20Oncology%20Research.pdf" target="_blank">Engaged Physical Sciences and Oncology Research</a></td>
+                    <td><a href="pdfs/medical/Engaged%20Physical%20Sciences%20and%20Oncology%20Research.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td><a href="pdfs/medical/Enhanced%20Photodynamic%20Therapy.pdf" target="_blank">Enhanced Photodynamic Therapy</a></td>
+                    <td><a href="pdfs/medical/Enhanced%20Photodynamic%20Therapy.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td><a href="pdfs/medical/FAK%20is%20Required%20for%20Tumor%20Metastasis-Related%20Fluid%20Microenvironment.pdf" target="_blank">FAK is Required for Tumor Metastasis-Related Fluid Microenvironment</a></td>
+                    <td><a href="pdfs/medical/FAK%20is%20Required%20for%20Tumor%20Metastasis-Related%20Fluid%20Microenvironment.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td><a href="pdfs/medical/Four%20Kinds%20of%20Adaptive%20Decomposition%20Algorithms.pdf" target="_blank">Four Kinds of Adaptive Decomposition Algorithms</a></td>
+                    <td><a href="pdfs/medical/Four%20Kinds%20of%20Adaptive%20Decomposition%20Algorithms.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td><a href="pdfs/medical/Gene%20Encoding%20a%20Serine-Threonine%20Protein%20Kinase.pdf" target="_blank">Gene Encoding a Serine-Threonine Protein Kinase</a></td>
+                    <td><a href="pdfs/medical/Gene%20Encoding%20a%20Serine-Threonine%20Protein%20Kinase.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td><a href="pdfs/medical/Genetics%20of%20Lipodystrophy.pdf" target="_blank">Genetics of Lipodystrophy</a></td>
+                    <td><a href="pdfs/medical/Genetics%20of%20Lipodystrophy.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td><a href="pdfs/medical/Haemothoraces%20in%20blunt%20thoracic%20trauma.pdf" target="_blank">Haemothoraces in blunt thoracic trauma</a></td>
+                    <td><a href="pdfs/medical/Haemothoraces%20in%20blunt%20thoracic%20trauma.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td><a href="pdfs/medical/Hepatitis%20C%20virus%20NS4B%20induces%20the%20degradation%20of%20TRIF.pdf" target="_blank">Hepatitis C virus NS4B induces the degradation of TRIF</a></td>
+                    <td><a href="pdfs/medical/Hepatitis%20C%20virus%20NS4B%20induces%20the%20degradation%20of%20TRIF.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td><a href="pdfs/medical/IMMH002%20ameliorates%20psoriasis%20in%20multiple%20animal%20models.pdf" target="_blank">IMMH002 ameliorates psoriasis in multiple animal models</a></td>
+                    <td><a href="pdfs/medical/IMMH002%20ameliorates%20psoriasis%20in%20multiple%20animal%20models.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td><a href="pdfs/medical/Involvement%20of%20machine%20learning%20to%20assess%20the%20promise%20of%20clinical%20trials.pdf" target="_blank">Involvement of machine learning to assess the promise of clinical trials</a></td>
+                    <td><a href="pdfs/medical/Involvement%20of%20machine%20learning%20to%20assess%20the%20promise%20of%20clinical%20trials.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td><a href="pdfs/medical/Isolation%20and%20characterization%20of%20SARS-CoV-2%20from%20the%20first%20US%20COVID-19%20patient.pdf" target="_blank">Isolation and characterization of SARS-CoV-2 from the first US COVID-19 patient</a></td>
+                    <td><a href="pdfs/medical/Isolation%20and%20characterization%20of%20SARS-CoV-2%20from%20the%20first%20US%20COVID-19%20patient.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td><a href="pdfs/medical/Late-Stage%20Protective%20Effect%20of%20Mito-TEMPO%20against%20Acetaminophen-Induced%20Hepatotoxicity.pdf" target="_blank">Late-Stage Protective Effect of Mito-TEMPO against Acetaminophen-Induced Hepatotoxicity</a></td>
+                    <td><a href="pdfs/medical/Late-Stage%20Protective%20Effect%20of%20Mito-TEMPO%20against%20Acetaminophen-Induced%20Hepatotoxicity.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td><a href="pdfs/medical/Low-Salt%20Intake%20Suggestions%20in%20Hypertensive%20Patients.pdf" target="_blank">Low-Salt Intake Suggestions in Hypertensive Patients</a></td>
+                    <td><a href="pdfs/medical/Low-Salt%20Intake%20Suggestions%20in%20Hypertensive%20Patients.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td><a href="pdfs/medical/Magnetic%20Resonance%20Imaging%20Features%20of%20Normal%20Thyroid%20Parenchyma.pdf" target="_blank">Magnetic Resonance Imaging Features of Normal Thyroid Parenchyma</a></td>
+                    <td><a href="pdfs/medical/Magnetic%20Resonance%20Imaging%20Features%20of%20Normal%20Thyroid%20Parenchyma.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td><a href="pdfs/medical/Molecular%20Diagnostics%20for%20COVID-19.pdf" target="_blank">Molecular Diagnostics for COVID-19</a></td>
+                    <td><a href="pdfs/medical/Molecular%20Diagnostics%20for%20COVID-19.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td><a href="pdfs/medical/Natural%20product-derived%20phytochemicals%20as%20potential%20agents%20against%20coronaviruses.pdf" target="_blank">Natural product-derived phytochemicals as potential agents against coronaviruses</a></td>
+                    <td><a href="pdfs/medical/Natural%20product-derived%20phytochemicals%20as%20potential%20agents%20against%20coronaviruses.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td><a href="pdfs/medical/New%20Approaches%20to%20Target%20Inflammation%20in%20Heart%20Failure.pdf" target="_blank">New Approaches to Target Inflammation in Heart Failure</a></td>
+                    <td><a href="pdfs/medical/New%20Approaches%20to%20Target%20Inflammation%20in%20Heart%20Failure.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td><a href="pdfs/medical/Nonalcoholic%20fatty%20liver%20disease%20and%20diabetes%20is%20associated%20with%20decreased%20CYP3A4.pdf" target="_blank">Nonalcoholic fatty liver disease and diabetes is associated with decreased CYP3A4</a></td>
+                    <td><a href="pdfs/medical/Nonalcoholic%20fatty%20liver%20disease%20and%20diabetes%20is%20associated%20with%20decreased%20CYP3A4.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td><a href="pdfs/medical/Novel%20Coronavirus%20from%20Patients%20with%20Pneumonia%20in%20China.pdf" target="_blank">Novel Coronavirus from Patients with Pneumonia in China</a></td>
+                    <td><a href="pdfs/medical/Novel%20Coronavirus%20from%20Patients%20with%20Pneumonia%20in%20China.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td><a href="pdfs/medical/PHYSIOLOGY-%20REPRODUCTIVE%20PHYSIOLOGY.pdf" target="_blank">PHYSIOLOGY- REPRODUCTIVE PHYSIOLOGY</a></td>
+                    <td><a href="pdfs/medical/PHYSIOLOGY-%20REPRODUCTIVE%20PHYSIOLOGY.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td><a href="pdfs/medical/Paraneoplastic%20cerebellar%20degeneration%20as%20initial%20presentation%20of%20renal%20cell%20carcinoma.pdf" target="_blank">Paraneoplastic cerebellar degeneration as initial presentation of renal cell carcinoma</a></td>
+                    <td><a href="pdfs/medical/Paraneoplastic%20cerebellar%20degeneration%20as%20initial%20presentation%20of%20renal%20cell%20carcinoma.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td><a href="pdfs/medical/Patient%20satisfaction%20after%20Z-epicanthoplasty%20and%20blepharoplasty.pdf" target="_blank">Patient satisfaction after Z-epicanthoplasty and blepharoplasty</a></td>
+                    <td><a href="pdfs/medical/Patient%20satisfaction%20after%20Z-epicanthoplasty%20and%20blepharoplasty.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td><a href="pdfs/medical/Pharmacogenetics%20of%20immunosuppressant%20drugs.pdf" target="_blank">Pharmacogenetics of immunosuppressant drugs</a></td>
+                    <td><a href="pdfs/medical/Pharmacogenetics%20of%20immunosuppressant%20drugs.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td><a href="pdfs/medical/Power%20Determination%20During%20Drug%20Development.pdf" target="_blank">Power Determination During Drug Development</a></td>
+                    <td><a href="pdfs/medical/Power%20Determination%20During%20Drug%20Development.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td><a href="pdfs/medical/Prediction%20of%20therapy%20response%20in%20bone-predominant%20metastatic%20breast%20cancer.pdf" target="_blank">Prediction of therapy response in bone-predominant metastatic breast cancer</a></td>
+                    <td><a href="pdfs/medical/Prediction%20of%20therapy%20response%20in%20bone-predominant%20metastatic%20breast%20cancer.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td><a href="pdfs/medical/Prescription%20opioids%20for%20misuse%20among%20young%20adults.pdf" target="_blank">Prescription opioids for misuse among young adults</a></td>
+                    <td><a href="pdfs/medical/Prescription%20opioids%20for%20misuse%20among%20young%20adults.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td><a href="pdfs/medical/Quantitative%20monitoring%20of%20alpha-amylase%20and%20amyloglucosidase.pdf" target="_blank">Quantitative monitoring of alpha-amylase and amyloglucosidase</a></td>
+                    <td><a href="pdfs/medical/Quantitative%20monitoring%20of%20alpha-amylase%20and%20amyloglucosidase.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td><a href="pdfs/medical/Reversing%20Type%202%20Diabetes.pdf" target="_blank">Reversing Type 2 Diabetes</a></td>
+                    <td><a href="pdfs/medical/Reversing%20Type%202%20Diabetes.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td><a href="pdfs/medical/SARS%20treatment.pdf" target="_blank">SARS treatment</a></td>
+                    <td><a href="pdfs/medical/SARS%20treatment.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td><a href="pdfs/medical/Spatio-temporal%20estimation%20of%20the%20daily%20cases%20of%20COVID-19.pdf" target="_blank">Spatio-temporal estimation of the daily cases of COVID-19</a></td>
+                    <td><a href="pdfs/medical/Spatio-temporal%20estimation%20of%20the%20daily%20cases%20of%20COVID-19.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td><a href="pdfs/medical/TENSOR%20GENERALIZED%20ESTIMATING%20EQUATIONS%20FOR%20LONGITUDINAL%20IMAGING%20ANALYSIS.pdf" target="_blank">TENSOR GENERALIZED ESTIMATING EQUATIONS FOR LONGITUDINAL IMAGING ANALYSIS</a></td>
+                    <td><a href="pdfs/medical/TENSOR%20GENERALIZED%20ESTIMATING%20EQUATIONS%20FOR%20LONGITUDINAL%20IMAGING%20ANALYSIS.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td><a href="pdfs/medical/Targeting%20an%20electrotonic%20effect%20with%20ablation.pdf" target="_blank">Targeting an electrotonic effect with ablation</a></td>
+                    <td><a href="pdfs/medical/Targeting%20an%20electrotonic%20effect%20with%20ablation.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td><a href="pdfs/medical/The%20Effects%20of%20Alternative%20Plant%20Sources%20of%20Omega-3.pdf" target="_blank">The Effects of Alternative Plant Sources of Omega-3</a></td>
+                    <td><a href="pdfs/medical/The%20Effects%20of%20Alternative%20Plant%20Sources%20of%20Omega-3.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td><a href="pdfs/medical/Tutorial%20on%20multiobjective%20optimization.pdf" target="_blank">Tutorial on multiobjective optimization</a></td>
+                    <td><a href="pdfs/medical/Tutorial%20on%20multiobjective%20optimization.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td><a href="pdfs/medical/Ultrasound%20Therapy%20on%20Myofascial%20Pain%20Syndrome%20of%20the%20Upper%20Trapezius.pdf" target="_blank">Ultrasound Therapy on Myofascial Pain Syndrome of the Upper Trapezius</a></td>
+                    <td><a href="pdfs/medical/Ultrasound%20Therapy%20on%20Myofascial%20Pain%20Syndrome%20of%20the%20Upper%20Trapezius.pdf" target="_blank" class="btn-view">View PDF</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Team Section -->
-    <section class="section" id="team">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Team</span>
-                <h2 class="section-title">Meet Group 4</h2>
-                <p class="section-desc">
-                    Graduate students in the Advanced Data Analytics program at the University of North Texas.
-                </p>
+    <div class="team">
+        <h2>Group 4 Members</h2>
+        <div class="team-members">
+            <div class="member">
+                <div class="name">Karan Parekh</div>
+                <div class="role">Team Lead</div>
             </div>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <div class="avatar-placeholder">KP</div>
-                    </div>
-                    <h4>Karan Parekh</h4>
-                    <span class="team-role">Team Lead &amp; NLP Engineer</span>
-                    <p>Focused on supply chain document analysis, model architecture design, and project coordination.</p>
-                    <div class="team-links">
-                        <a href="https://github.com/karanparekh14" target="_blank" rel="noopener" title="GitHub">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        </a>
-                        <a href="https://linkedin.com/" target="_blank" rel="noopener" title="LinkedIn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <div class="avatar-placeholder">SP</div>
-                    </div>
-                    <h4>Sanjana PR</h4>
-                    <span class="team-role">Data Analyst</span>
-                    <p>Specializing in medical document preprocessing, data cleaning, and feature engineering for NLP models.</p>
-                    <div class="team-links">
-                        <a href="https://linkedin.com/" target="_blank" rel="noopener" title="LinkedIn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <div class="avatar-placeholder">SM</div>
-                    </div>
-                    <h4>Sana Mhapsekar</h4>
-                    <span class="team-role">ML Engineer</span>
-                    <p>Working on neural network model training, hyperparameter tuning, and evaluation metrics.</p>
-                    <div class="team-links">
-                        <a href="https://linkedin.com/" target="_blank" rel="noopener" title="LinkedIn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <div class="avatar-placeholder">MM</div>
-                    </div>
-                    <h4>Medina Maloku</h4>
-                    <span class="team-role">Research Analyst</span>
-                    <p>Leading supply chain research, literature review, and result visualization and documentation.</p>
-                    <div class="team-links">
-                        <a href="https://linkedin.com/" target="_blank" rel="noopener" title="LinkedIn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                    </div>
-                </div>
+            <div class="member">
+                <div class="name">Sanjana PR</div>
+                <div class="role">Data Analyst</div>
+            </div>
+            <div class="member">
+                <div class="name">Sana Mhapsekar</div>
+                <div class="role">ML Engineer</div>
+            </div>
+            <div class="member">
+                <div class="name">Medina Maloku</div>
+                <div class="role">Research Analyst</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <h3>🧠 ADTA 5770 &mdash; Group 4</h3>
-                    <p>Knowledge Base Contamination &amp; RAG Pipeline Research</p>
-                    <p>University of North Texas &middot; Spring 2026</p>
-                    <p class="footer-instructor">Instructor: Dr. Thuan L. Nguyen, Ph.D.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#research">Contamination</a>
-                    <a href="#methodology">Pipeline</a>
-                    <a href="#results">Results</a>
-                    <a href="#team">Team</a>
-                </div>
-                <div class="footer-links">
-                    <h4>Resources</h4>
-                    <a href="https://github.com/karanparekh14/ADTA5760--Group-4" target="_blank" rel="noopener">GitHub Repository</a>
-                    <a href="https://canvas.unt.edu" target="_blank" rel="noopener">Canvas LMS</a>
-                    <a href="https://www.unt.edu" target="_blank" rel="noopener">UNT Website</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 ADTA 5770 Group 4 &mdash; University of North Texas. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+</div>
 
-    <script src="js/main.js"></script>
+<div class="footer">
+    <p>ADTA-DAST 5770/5900 &bull; Spring 2026 &bull; University of North Texas</p>
+    <p>Contaminated Knowledge Base for Generative AI with LLMs</p>
+</div>
+
+<script>
+function filterTable(tableId, query) {
+    const table = document.getElementById(tableId);
+    const rows = table.querySelectorAll('tbody tr');
+    const q = query.toLowerCase();
+    rows.forEach(row => {
+        const title = row.cells[1].textContent.toLowerCase();
+        row.style.display = title.includes(q) ? '' : 'none';
+    });
+}
+</script>
+
 </body>
 </html>
