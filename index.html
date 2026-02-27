@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADTA 5760 Group 4 | NLP with Neural Networks</title>
+    <title>ADTA 5770 Group 4 | Knowledge Base Contamination</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +21,8 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#research" class="nav-link">Research</a></li>
-                <li><a href="#methodology" class="nav-link">Methodology</a></li>
+                <li><a href="#research" class="nav-link">Contamination</a></li>
+                <li><a href="#methodology" class="nav-link">Pipeline</a></li>
                 <li><a href="#results" class="nav-link">Results</a></li>
                 <li><a href="#team" class="nav-link">Team</a></li>
             </ul>
@@ -40,31 +40,32 @@
             <div class="hero-particles" id="particles"></div>
         </div>
         <div class="hero-content">
-            <div class="hero-badge">ADTA 5760 &middot; Spring 2026 &middot; UNT</div>
+            <div class="hero-badge">ADTA 5770 &middot; Spring 2026 &middot; UNT</div>
             <h1 class="hero-title">
-                Natural Language Processing<br>
-                <span class="gradient-text">with Artificial Neural Networks</span>
+                Knowledge Base<br>
+                <span class="gradient-text">Contamination &amp; RAG Pipeline</span>
             </h1>
             <p class="hero-subtitle">
-                Exploring NLP techniques across <strong>Supply Chain Management</strong> and 
-                <strong>Medical/Healthcare</strong> domains using deep learning approaches.
+                By-design contamination of <strong>150 PDF documents</strong> across 
+                <strong>Supply Chain</strong> and <strong>Medical</strong> knowledge bases 
+                to study RAG pipeline robustness.
             </p>
             <div class="hero-actions">
-                <a href="#research" class="btn btn-primary">View Research</a>
+                <a href="#research" class="btn btn-primary">View Methodology</a>
                 <a href="#team" class="btn btn-outline">Meet the Team</a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number">2</span>
-                    <span class="stat-label">Research Domains</span>
+                    <span class="stat-number">150</span>
+                    <span class="stat-label">PDFs Contaminated</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Team Members</span>
+                    <span class="stat-number">443</span>
+                    <span class="stat-label">Contaminants Injected</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">100+</span>
-                    <span class="stat-label">Documents Analyzed</span>
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Contamination Types</span>
                 </div>
             </div>
         </div>
@@ -81,40 +82,39 @@
                 <span class="section-tag">Overview</span>
                 <h2 class="section-title">About the Project</h2>
                 <p class="section-desc">
-                    Our group project for ADTA 5760 explores the intersection of Natural Language Processing 
-                    and Artificial Neural Networks, focusing on real-world applications in two critical domains.
+                    HW2 for ADTA 5770 involves constructing two domain-specific knowledge bases and
+                    deliberately contaminating each PDF document with by-design errors to study the
+                    impact on downstream Retrieval-Augmented Generation (RAG) pipelines.
                 </p>
             </div>
             <div class="about-grid">
                 <div class="about-card">
                     <div class="about-icon">📦</div>
-                    <h3>Supply Chain Management</h3>
+                    <h3>Supply Chain Knowledge Base</h3>
                     <p>
-                        Applying NLP techniques to extract insights from supply chain documents, 
-                        including procurement reports, logistics data, and operational documentation. 
-                        Our analysis reveals patterns in supplier communications, demand forecasting 
-                        narratives, and risk assessment language.
+                        100 PDF documents covering supply chain management, logistics, procurement,
+                        inventory optimization, and risk management. Each document was contaminated
+                        with 3 by-design errors targeting domain-specific terminology.
                     </p>
                 </div>
                 <div class="about-card">
                     <div class="about-icon">🏥</div>
-                    <h3>Medical &amp; Healthcare</h3>
+                    <h3>Medical Knowledge Base</h3>
                     <p>
-                        Leveraging neural network-based NLP to process medical documents, clinical 
-                        reports, and healthcare literature. Our research focuses on extracting meaningful 
-                        information from unstructured medical text, identifying key entities, and 
-                        understanding document sentiment and themes.
+                        50 PDF documents spanning clinical research, medical literature, pharmacology,
+                        and healthcare management. Contaminations were carefully placed to introduce
+                        plausible but incorrect medical information.
                     </p>
                 </div>
                 <div class="about-card full-width">
                     <div class="about-icon">🎯</div>
                     <h3>Project Objectives</h3>
                     <ul class="objectives-list">
-                        <li>Collect and preprocess domain-specific PDF documents for NLP analysis</li>
-                        <li>Apply text classification, named entity recognition, and sentiment analysis techniques</li>
-                        <li>Implement neural network architectures (RNN, LSTM, Transformers) for text processing</li>
-                        <li>Compare NLP model performance across supply chain and medical domains</li>
-                        <li>Visualize findings and present actionable insights from unstructured text data</li>
+                        <li>Collect 150 domain-specific PDF documents across supply chain and medical fields</li>
+                        <li>Apply 3 types of by-design contamination per document: Typo, Conflicting, and Nonsense</li>
+                        <li>Use in-place PDF text replacement to contaminate at randomly selected locations</li>
+                        <li>Document every contaminant with ID, type, original text, replacement, and exact location</li>
+                        <li>Study how contaminated knowledge bases affect RAG pipeline answer quality</li>
                     </ul>
                 </div>
             </div>
@@ -125,68 +125,61 @@
     <section class="section section-alt" id="research">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Research</span>
-                <h2 class="section-title">Our Research Areas</h2>
+                <span class="section-tag">Contamination</span>
+                <h2 class="section-title">Contamination Types</h2>
                 <p class="section-desc">
-                    Deep-diving into two high-impact domains where NLP can transform how organizations 
-                    process and understand large volumes of text data.
+                    Three distinct contamination strategies were applied across both knowledge bases,
+                    each targeting a different type of error that could mislead a RAG system.
                 </p>
             </div>
             <div class="research-tabs">
-                <button class="tab-btn active" data-tab="supply-chain">📦 Supply Chain</button>
-                <button class="tab-btn" data-tab="medical">🏥 Medical</button>
+                <button class="tab-btn active" data-tab="supply-chain">🔤 Typo</button>
+                <button class="tab-btn" data-tab="medical">⚡ Conflicting</button>
+                <button class="tab-btn" data-tab="nonsense-tab">🌀 Nonsense</button>
             </div>
             <div class="research-content">
                 <div class="tab-panel active" id="supply-chain">
                     <div class="research-detail">
                         <div class="research-text">
-                            <h3>Supply Chain NLP Analysis</h3>
+                            <h3>Typo Contamination</h3>
                             <p>
-                                The supply chain domain generates vast amounts of unstructured text — 
-                                from procurement emails and contracts to logistics reports and supplier 
-                                evaluations. Our research applies NLP to make this data actionable.
+                                Deliberate misspellings of domain-specific technical terms — subtle enough
+                                to appear like human error, yet capable of disrupting keyword-based retrieval
+                                and confusing language models during answer generation.
                             </p>
                             <div class="research-highlights">
                                 <div class="highlight">
-                                    <span class="highlight-label">Documents</span>
-                                    <span class="highlight-value">50+ PDFs</span>
+                                    <span class="highlight-label">Count</span>
+                                    <span class="highlight-value">149 injected</span>
                                 </div>
                                 <div class="highlight">
-                                    <span class="highlight-label">Focus Areas</span>
-                                    <span class="highlight-value">Procurement, Logistics, Risk</span>
+                                    <span class="highlight-label">Examples</span>
+                                    <span class="highlight-value">methodology → methodolgy</span>
                                 </div>
                                 <div class="highlight">
-                                    <span class="highlight-label">Techniques</span>
-                                    <span class="highlight-value">NER, Classification, Sentiment</span>
+                                    <span class="highlight-label">Impact</span>
+                                    <span class="highlight-value">Retrieval noise</span>
                                 </div>
                             </div>
-                            <h4>Key Findings</h4>
+                            <h4>Approach</h4>
                             <ul>
-                                <li>Automated extraction of supplier names, contract terms, and delivery timelines</li>
-                                <li>Sentiment patterns in supplier communications correlate with delivery performance</li>
-                                <li>Topic modeling reveals recurring themes in supply chain risk documentation</li>
-                                <li>Text classification achieves high accuracy in categorizing procurement documents</li>
+                                <li>50+ term typo map covering both supply chain and medical vocabulary</li>
+                                <li>Applied at randomly selected pages — one per document</li>
+                                <li>In-place PDF replacement using PyMuPDF TextWriter with font matching</li>
+                                <li>Original text visually replaced; no visible strikethrough or markup</li>
                             </ul>
                         </div>
                         <div class="research-visual">
                             <div class="chart-placeholder" id="chart-supply">
-                                <div class="chart-title">Document Classification Accuracy</div>
+                                <div class="chart-title">Typo Distribution by Domain</div>
                                 <div class="bar-chart">
                                     <div class="bar-item">
-                                        <span class="bar-label">Procurement</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 92%"><span>92%</span></div></div>
+                                        <span class="bar-label">Supply Chain</span>
+                                        <div class="bar-track"><div class="bar-fill" style="--width: 67%"><span>~100</span></div></div>
                                     </div>
                                     <div class="bar-item">
-                                        <span class="bar-label">Logistics</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 88%"><span>88%</span></div></div>
-                                    </div>
-                                    <div class="bar-item">
-                                        <span class="bar-label">Risk Reports</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 85%"><span>85%</span></div></div>
-                                    </div>
-                                    <div class="bar-item">
-                                        <span class="bar-label">Contracts</span>
-                                        <div class="bar-track"><div class="bar-fill" style="--width: 90%"><span>90%</span></div></div>
+                                        <span class="bar-label">Medical</span>
+                                        <div class="bar-track"><div class="bar-fill" style="--width: 33%"><span>~49</span></div></div>
                                     </div>
                                 </div>
                             </div>
@@ -196,54 +189,93 @@
                 <div class="tab-panel" id="medical">
                     <div class="research-detail">
                         <div class="research-text">
-                            <h3>Medical Document NLP Analysis</h3>
+                            <h3>Conflicting Information</h3>
                             <p>
-                                Healthcare organizations deal with massive amounts of clinical text, 
-                                research papers, and patient documentation. NLP can help extract 
-                                structured insights from this unstructured data, improving decision-making 
-                                and research efficiency.
+                                Substitution of accurate domain terms with plausible but factually incorrect
+                                alternatives — for example replacing a correct technical concept with a
+                                contradictory one. These are the most dangerous contaminants for RAG pipelines.
                             </p>
                             <div class="research-highlights">
                                 <div class="highlight">
-                                    <span class="highlight-label">Documents</span>
-                                    <span class="highlight-value">50+ PDFs</span>
+                                    <span class="highlight-label">Count</span>
+                                    <span class="highlight-value">147 injected</span>
                                 </div>
                                 <div class="highlight">
-                                    <span class="highlight-label">Focus Areas</span>
-                                    <span class="highlight-value">Clinical, Research, Reports</span>
+                                    <span class="highlight-label">Examples</span>
+                                    <span class="highlight-value">effective → ineffective</span>
                                 </div>
                                 <div class="highlight">
-                                    <span class="highlight-label">Techniques</span>
-                                    <span class="highlight-value">BioNER, Classification, QA</span>
+                                    <span class="highlight-label">Impact</span>
+                                    <span class="highlight-value">Factual errors in answers</span>
                                 </div>
                             </div>
-                            <h4>Key Findings</h4>
+                            <h4>Approach</h4>
                             <ul>
-                                <li>Biomedical NER effectively identifies diseases, drugs, and treatment entities</li>
-                                <li>Document classification distinguishes clinical notes from research papers</li>
-                                <li>Transformer-based models outperform traditional ML on medical text tasks</li>
-                                <li>Domain-specific pre-training significantly improves NLP model accuracy</li>
+                                <li>~40 antonym/conflicting pairs across both knowledge base domains</li>
+                                <li>Targets high-signal words (increase/decrease, effective/ineffective, etc.)</li>
+                                <li>Applied on a different page than the typo contamination per document</li>
+                                <li>Designed to produce confidently wrong RAG responses</li>
                             </ul>
                         </div>
                         <div class="research-visual">
                             <div class="chart-placeholder" id="chart-medical">
-                                <div class="chart-title">Entity Recognition F1-Scores</div>
+                                <div class="chart-title">Conflicting Distribution by Domain</div>
                                 <div class="bar-chart">
                                     <div class="bar-item">
-                                        <span class="bar-label">Diseases</span>
-                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 89%"><span>89%</span></div></div>
+                                        <span class="bar-label">Supply Chain</span>
+                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 67%"><span>~98</span></div></div>
                                     </div>
                                     <div class="bar-item">
-                                        <span class="bar-label">Medications</span>
-                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 91%"><span>91%</span></div></div>
+                                        <span class="bar-label">Medical</span>
+                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 33%"><span>~49</span></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel" id="nonsense-tab">
+                    <div class="research-detail">
+                        <div class="research-text">
+                            <h3>Nonsense / Absurd Replacement</h3>
+                            <p>
+                                Replacement of meaningful domain terms with completely unrelated, absurd
+                                phrases — such as replacing &ldquo;supply chain&rdquo; with &ldquo;dolphin choir&rdquo;.
+                                These are the most detectable but test whether RAG systems flag incoherent passages.
+                            </p>
+                            <div class="research-highlights">
+                                <div class="highlight">
+                                    <span class="highlight-label">Count</span>
+                                    <span class="highlight-value">147 injected</span>
+                                </div>
+                                <div class="highlight">
+                                    <span class="highlight-label">Examples</span>
+                                    <span class="highlight-value">supply chain → dolphin choir</span>
+                                </div>
+                                <div class="highlight">
+                                    <span class="highlight-label">Impact</span>
+                                    <span class="highlight-value">Incoherent retrieved context</span>
+                                </div>
+                            </div>
+                            <h4>Approach</h4>
+                            <ul>
+                                <li>~35 absurd replacement pairs targeting key domain phrases</li>
+                                <li>Replacements are semantically unrelated and phonetically distinct</li>
+                                <li>Applied on a third unique page per document</li>
+                                <li>Tests whether LLMs hallucinate explanations for nonsense context</li>
+                            </ul>
+                        </div>
+                        <div class="research-visual">
+                            <div class="chart-placeholder" id="chart-nonsense">
+                                <div class="chart-title">Nonsense Distribution by Domain</div>
+                                <div class="bar-chart">
+                                    <div class="bar-item">
+                                        <span class="bar-label">Supply Chain</span>
+                                        <div class="bar-track"><div class="bar-fill" style="--width: 67%"><span>~98</span></div></div>
                                     </div>
                                     <div class="bar-item">
-                                        <span class="bar-label">Procedures</span>
-                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 84%"><span>84%</span></div></div>
-                                    </div>
-                                    <div class="bar-item">
-                                        <span class="bar-label">Symptoms</span>
-                                        <div class="bar-track"><div class="bar-fill bar-medical" style="--width: 86%"><span>86%</span></div></div>
+                                        <span class="bar-label">Medical</span>
+                                        <div class="bar-track"><div class="bar-fill" style="--width: 33%"><span>~49</span></div></div>
                                     </div>
                                 </div>
                             </div>
@@ -258,50 +290,50 @@
     <section class="section" id="methodology">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Approach</span>
-                <h2 class="section-title">Methodology</h2>
+                <span class="section-tag">Pipeline</span>
+                <h2 class="section-title">Contamination Pipeline</h2>
                 <p class="section-desc">
-                    Our end-to-end NLP pipeline from raw PDF documents to actionable insights.
+                    End-to-end automated pipeline for building and contaminating domain-specific knowledge bases.
                 </p>
             </div>
             <div class="pipeline">
                 <div class="pipeline-step">
                     <div class="step-number">01</div>
                     <div class="step-content">
-                        <h4>Data Collection</h4>
-                        <p>Gathering 100+ PDF documents across supply chain and medical domains from academic papers, industry reports, and public datasets.</p>
+                        <h4>Document Collection</h4>
+                        <p>Curated 150 PDF documents: 100 supply chain (logistics, procurement, inventory, risk) and 50 medical (clinical, pharmacology, healthcare management).</p>
                     </div>
                 </div>
                 <div class="pipeline-connector"></div>
                 <div class="pipeline-step">
                     <div class="step-number">02</div>
                     <div class="step-content">
-                        <h4>Preprocessing</h4>
-                        <p>PDF text extraction, cleaning, tokenization, stop-word removal, lemmatization, and domain-specific preprocessing.</p>
+                        <h4>Contamination Mapping</h4>
+                        <p>Built domain-specific word maps: 50+ typo pairs, ~40 conflicting pairs, ~35 nonsense pairs — covering terminology from both supply chain and medical domains.</p>
                     </div>
                 </div>
                 <div class="pipeline-connector"></div>
                 <div class="pipeline-step">
                     <div class="step-number">03</div>
                     <div class="step-content">
-                        <h4>Feature Engineering</h4>
-                        <p>TF-IDF vectorization, word embeddings (Word2Vec, GloVe), and contextual embeddings using pre-trained transformers.</p>
+                        <h4>Font Extraction &amp; Matching</h4>
+                        <p>Each PDF's existing fonts are extracted using PyMuPDF. Replacement text is rendered using the exact same font, size, and position as the original text.</p>
                     </div>
                 </div>
                 <div class="pipeline-connector"></div>
                 <div class="pipeline-step">
                     <div class="step-number">04</div>
                     <div class="step-content">
-                        <h4>Model Training</h4>
-                        <p>Training RNN, LSTM, and Transformer-based models for text classification, NER, and sentiment analysis tasks.</p>
+                        <h4>In-Place PDF Replacement</h4>
+                        <p>Original text is redacted using a white rectangle overlay, then the replacement text is drawn in-place with PyMuPDF TextWriter — visually seamless, no annotations.</p>
                     </div>
                 </div>
                 <div class="pipeline-connector"></div>
                 <div class="pipeline-step">
                     <div class="step-number">05</div>
                     <div class="step-content">
-                        <h4>Evaluation &amp; Visualization</h4>
-                        <p>Model evaluation using accuracy, F1-score, precision, and recall. Results visualized through interactive charts and dashboards.</p>
+                        <h4>Documentation &amp; Verification</h4>
+                        <p>Every contaminant logged with document ID, contaminant ID, type, original text, replacement, context snippet, and exact page coordinates. Exported as TXT, CSV, and Excel.</p>
                     </div>
                 </div>
             </div>
@@ -310,36 +342,28 @@
                 <h3>Technology Stack</h3>
                 <div class="tech-grid">
                     <div class="tech-item">
-                        <span class="tech-name">Python</span>
+                        <span class="tech-name">Python 3.12</span>
                         <span class="tech-desc">Core Language</span>
                     </div>
                     <div class="tech-item">
-                        <span class="tech-name">TensorFlow</span>
-                        <span class="tech-desc">Deep Learning</span>
+                        <span class="tech-name">PyMuPDF</span>
+                        <span class="tech-desc">PDF Manipulation</span>
                     </div>
                     <div class="tech-item">
-                        <span class="tech-name">Keras</span>
-                        <span class="tech-desc">Neural Networks</span>
+                        <span class="tech-name">TextWriter</span>
+                        <span class="tech-desc">Font-matched Insert</span>
                     </div>
                     <div class="tech-item">
-                        <span class="tech-name">spaCy</span>
-                        <span class="tech-desc">NLP Pipeline</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">NLTK</span>
-                        <span class="tech-desc">Text Processing</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">Hugging Face</span>
-                        <span class="tech-desc">Transformers</span>
-                    </div>
-                    <div class="tech-item">
-                        <span class="tech-name">scikit-learn</span>
-                        <span class="tech-desc">ML Models</span>
+                        <span class="tech-name">openpyxl</span>
+                        <span class="tech-desc">Excel Reports</span>
                     </div>
                     <div class="tech-item">
                         <span class="tech-name">GCP</span>
                         <span class="tech-desc">Cloud Platform</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">OneDrive</span>
+                        <span class="tech-desc">File Sharing</span>
                     </div>
                 </div>
             </div>
@@ -350,76 +374,76 @@
     <section class="section section-alt" id="results">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Outcomes</span>
-                <h2 class="section-title">Results &amp; Insights</h2>
+                <span class="section-tag">Results</span>
+                <h2 class="section-title">Contamination Results</h2>
                 <p class="section-desc">
-                    Key findings from our NLP analysis across both research domains.
+                    Summary of contaminants successfully injected across both knowledge bases.
                 </p>
             </div>
             <div class="results-grid">
                 <div class="result-card">
                     <div class="result-metric">
-                        <span class="metric-value" data-count="92">0</span>
-                        <span class="metric-unit">%</span>
+                        <span class="metric-value" data-count="150">0</span>
+                        <span class="metric-unit"></span>
                     </div>
-                    <h4>Classification Accuracy</h4>
-                    <p>Average accuracy across document classification tasks using fine-tuned neural network models.</p>
+                    <h4>PDFs Contaminated</h4>
+                    <p>All 150 documents (100 supply chain + 50 medical) successfully processed with by-design in-place contaminations.</p>
                 </div>
                 <div class="result-card">
                     <div class="result-metric">
-                        <span class="metric-value" data-count="88">0</span>
-                        <span class="metric-unit">%</span>
+                        <span class="metric-value" data-count="443">0</span>
+                        <span class="metric-unit"></span>
                     </div>
-                    <h4>NER F1-Score</h4>
-                    <p>Named entity recognition performance on domain-specific entities in both supply chain and medical texts.</p>
+                    <h4>Total Contaminants</h4>
+                    <p>443 out of 450 possible contaminants injected — 3 per document across Typo, Conflicting, and Nonsense types.</p>
                 </div>
                 <div class="result-card">
                     <div class="result-metric">
-                        <span class="metric-value" data-count="15">0</span>
-                        <span class="metric-unit">x</span>
+                        <span class="metric-value" data-count="3">0</span>
+                        <span class="metric-unit"></span>
                     </div>
-                    <h4>Faster Processing</h4>
-                    <p>Speed improvement over manual document review when using our automated NLP pipeline.</p>
+                    <h4>Types per Document</h4>
+                    <p>Every document received one Typo, one Conflicting, and one Nonsense contaminant — each on a different page.</p>
                 </div>
                 <div class="result-card">
                     <div class="result-metric">
                         <span class="metric-value" data-count="100">0</span>
-                        <span class="metric-unit">+</span>
+                        <span class="metric-unit">%</span>
                     </div>
-                    <h4>Documents Analyzed</h4>
-                    <p>Total PDF documents processed and analyzed across both supply chain and medical domains.</p>
+                    <h4>Visual Fidelity</h4>
+                    <p>All replacements are visually seamless — font-matched, same size and position as original text, undetectable by eye.</p>
                 </div>
             </div>
 
             <div class="insights-section">
-                <h3>Key Insights</h3>
+                <h3>Key Findings</h3>
                 <div class="insights-grid">
                     <div class="insight">
                         <span class="insight-num">1</span>
                         <div>
-                            <h4>Domain Adaptation Matters</h4>
-                            <p>Models pre-trained on general text and fine-tuned on domain-specific data consistently outperform generic models by 8-12% on classification tasks.</p>
+                            <h4>Multi-word Phrases Are Tricky</h4>
+                            <p>Phrases like &ldquo;supply chain&rdquo; spanning line breaks in PDFs require per-word rect validation — naive redaction creates overlapping text artifacts.</p>
                         </div>
                     </div>
                     <div class="insight">
                         <span class="insight-num">2</span>
                         <div>
-                            <h4>Medical Text Is Harder</h4>
-                            <p>Medical documents present unique challenges — specialized vocabulary, abbreviations, and complex sentence structures require domain-specific preprocessing.</p>
+                            <h4>Font Extraction is Key</h4>
+                            <p>84% of replacements used the document's own embedded fonts via PyMuPDF, ensuring the contaminated text is visually indistinguishable from the original.</p>
                         </div>
                     </div>
                     <div class="insight">
                         <span class="insight-num">3</span>
                         <div>
-                            <h4>Transformers Win</h4>
-                            <p>Transformer-based architectures (BERT, BioBERT) consistently outperform RNN/LSTM baselines on all text classification and NER tasks.</p>
+                            <h4>Conflicting Errors Are Most Dangerous</h4>
+                            <p>Substitutions like &ldquo;effective&rdquo; → &ldquo;ineffective&rdquo; are the hardest to detect and most likely to cause RAG systems to generate confidently wrong answers.</p>
                         </div>
                     </div>
                     <div class="insight">
                         <span class="insight-num">4</span>
                         <div>
-                            <h4>Practical Value</h4>
-                            <p>Automated NLP pipelines can significantly reduce manual effort in processing supply chain and medical documents, enabling faster decision-making.</p>
+                            <h4>Automated Documentation</h4>
+                            <p>All 443 contaminants are fully documented with exact page coordinates, context snippets, and contaminant IDs — exported as TXT, CSV, and Excel.</p>
                         </div>
                     </div>
                 </div>
@@ -502,8 +526,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <h3>🧠 ADTA 5760 &mdash; Group 4</h3>
-                    <p>Natural Language Processing with Artificial Neural Networks</p>
+                    <h3>🧠 ADTA 5770 &mdash; Group 4</h3>
+                    <p>Knowledge Base Contamination &amp; RAG Pipeline Research</p>
                     <p>University of North Texas &middot; Spring 2026</p>
                     <p class="footer-instructor">Instructor: Dr. Thuan L. Nguyen, Ph.D.</p>
                 </div>
@@ -511,8 +535,8 @@
                     <h4>Quick Links</h4>
                     <a href="#home">Home</a>
                     <a href="#about">About</a>
-                    <a href="#research">Research</a>
-                    <a href="#methodology">Methodology</a>
+                    <a href="#research">Contamination</a>
+                    <a href="#methodology">Pipeline</a>
                     <a href="#results">Results</a>
                     <a href="#team">Team</a>
                 </div>
@@ -524,7 +548,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 ADTA 5760 Group 4 &mdash; University of North Texas. All rights reserved.</p>
+                <p>&copy; 2026 ADTA 5770 Group 4 &mdash; University of North Texas. All rights reserved.</p>
             </div>
         </div>
     </footer>
