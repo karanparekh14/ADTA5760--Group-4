@@ -1,0 +1,23 @@
+# ADTA 5770 Group 4 — Q&A Search System Requirements
+# Tested on Google Colab (Python 3.12)
+
+# GCP Vertex AI
+google-cloud-aiplatform>=1.71.0
+google-cloud-storage>=2.10.0
+
+# LangChain — modern modular packaging
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-classic>=0.0.10
+langchain-community>=0.3.0
+langchain-google-vertexai>=2.0.0
+langchain-google-genai>=2.0.0
+langchain-google-community>=2.0.0
+langchain-text-splitters>=0.3.0
+
+# Document handling
+pypdf>=4.0.0
+unstructured>=0.10.0
+
+# Utilities
+textwrap3>=0.9.2

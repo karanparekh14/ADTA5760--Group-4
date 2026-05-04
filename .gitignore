@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# GCP credentials (NEVER commit these)
+*.json
+!package.json
+!package-lock.json
+service-account*.json
+credentials*.json
+
+# Vercel
+.vercel
+.next
+node_modules/
+
+# Local artifacts
+*.log
+*.tmp
+local_outputs/
