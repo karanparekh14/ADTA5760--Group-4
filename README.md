@@ -1,4 +1,4 @@
-# Generative AI Project Portfolio — Group 4
+# Generative AI Project Portfolio (Group 4)
 
 > **Two end-to-end Generative AI systems built across two semesters at the University of North Texas, M.S. in Advanced Data Analytics.**
 
@@ -16,8 +16,8 @@
 
 | Project | Course | Tech | Status |
 |---|---|---|---|
-| 🎯 **[Sustainable SCM Q&A Search System](./adta5770-rag-qa-system/)** | ADTA 5770 — Generative AI with LLMs | Vertex AI · Gemini 2.5 Pro · LangChain · RAG | ✅ Spring 2026 — Final |
-| 📚 **[Contaminated Knowledge Base for LLM Testing](#-companion-project--contaminated-knowledge-base-for-llm-testing)** | ADTA 5760 — NLP with Neural Networks | HTML · CSS · JS · Vercel | ✅ Fall 2025 |
+| 🎯 **[Sustainable SCM Q&A Search System](./adta5770-rag-qa-system/)** | ADTA 5770: Generative AI with LLMs | Vertex AI · Gemini 2.5 Pro · LangChain · RAG | ✅ Spring 2026, Final |
+| 📚 **[Contaminated Knowledge Base for LLM Testing](#-companion-project-contaminated-knowledge-base-for-llm-testing)** | ADTA 5760: NLP with Neural Networks | HTML · CSS · JS · Vercel | ✅ Fall 2025 |
 
 ---
 
@@ -25,7 +25,7 @@
 
 A **production-grade Retrieval-Augmented Generation (RAG)** pipeline that answers natural-language questions about Sustainable Supply Chain Management, grounded in a curated knowledge base of **100 academic and industry PDFs**. Built end-to-end on **Google Cloud Platform Vertex AI** with **Gemini 2.5 Pro** as the generator and **Matching Engine** as the vector store.
 
-The system retrieves relevant context using semantic search, generates grounded answers with cited sources, and — critically — **refuses to hallucinate** when asked about topics outside its corpus.
+The system retrieves relevant context using semantic search, generates grounded answers with cited sources, and, critically, **refuses to hallucinate** when asked about topics outside its corpus.
 
 ## 🏗️ Architecture
 
@@ -33,8 +33,8 @@ The system retrieves relevant context using semantic search, generates grounded 
 
 The system implements the canonical RAG pattern, decomposed into two cooperating subsystems:
 
-- **Information Retrieval (IR)** — `100 PDFs → Chunker → Embedding Model → Vector Store → Retriever`
-- **Text Generation** — `Prompt Template → Retrieval Chain → Generator LLM`
+- **Information Retrieval (IR):** `100 PDFs → Chunker → Embedding Model → Vector Store → Retriever`
+- **Text Generation:** `Prompt Template → Retrieval Chain → Generator LLM`
 
 A user query is routed simultaneously to the retriever (which produces ranked context from the knowledge base) and the prompt template. The combined prompt is passed to Gemini, which produces a grounded, cited answer.
 
@@ -49,7 +49,7 @@ A user query is routed simultaneously to the retriever (which produces ranked co
 | **Orchestration** | LangChain (modern API) | `create_retrieval_chain` + `create_stuff_documents_chain` |
 | **Document Loading** | `PyPDFLoader` (LangChain Community) | Local download from GCS for performance |
 | **Chunking** | `RecursiveCharacterTextSplitter` | `chunk_size=1000, overlap=200` |
-| **IDE** | Google Colab (Python 3.12) | — |
+| **IDE** | Google Colab (Python 3.12) | n/a |
 | **Storage** | GCS Bucket `gs://adta5770-docs-folder-group4-kp` | 100 PDFs |
 
 ## 📊 Knowledge Base Statistics
@@ -77,28 +77,28 @@ A user query is routed simultaneously to the retriever (which produces ranked co
 10. Cleanup          ──→  Undeploy + delete (post-review)
 ```
 
-## 🎬 Demo — Sample Queries
+## 🎬 Demo: Sample Queries
 
 ### ✅ FOUND query (in-domain)
 **Q:** *What is sustainable supply chain management?*
 
-**A (Gemini, grounded):** *"SSCM is the integration of sustainability into supply chain operations — a fundamental component of contemporary business strategy. It involves three dimensions: economic, environmental, and social. Goals: mitigate GHG emissions and resource depletion while improving compliance and resilience."*
+**A (Gemini, grounded):** *"SSCM is the integration of sustainability into supply chain operations, a fundamental component of contemporary business strategy. It involves three dimensions: economic, environmental, and social. Goals: mitigate GHG emissions and resource depletion while improving compliance and resilience."*
 
 → **10 chunks retrieved** across 5 distinct papers · 5/5 Likert score on accuracy and source identification.
 
-### 🚫 NOT FOUND query (out-of-domain — safety test)
+### 🚫 NOT FOUND query (out-of-domain safety test)
 **Q:** *What are the symptoms and treatment of type 2 diabetes?*
 
 **A (Gemini):** *"I cannot determine the answer to that."*
 
-→ Demonstrates **RAG grounding safety** — system refuses to fabricate when context is irrelevant. This is the most important safety property of production RAG.
+→ Demonstrates **RAG grounding safety**: the system refuses to fabricate when context is irrelevant. This is the most important safety property of production RAG.
 
 ## 🧗 Engineering Challenges Solved
 
 | Challenge | Solution |
 |---|---|
 | Vertex API rate-limit (429) during embedding | Exponential back-off with 90s sleep, batch=25, throttled streaming |
-| Endpoint deploy takes 30–60 min and occasionally hangs | Built diagnostic cells to verify deploy state independently |
+| Endpoint deploy takes 30 to 60 min and occasionally hangs | Built diagnostic cells to verify deploy state independently |
 | LangChain `filters` keyword incompatibility | Identified that `find_neighbors()` expects singular `filter` (not `filters`) |
 | `RetrievalQA` deprecated in modern LangChain | Migrated to `create_retrieval_chain` + `create_stuff_documents_chain` |
 | Quota exhaustion mid-ingestion | Streaming-update index supports resumable ingestion from any chunk index |
@@ -120,7 +120,7 @@ adta5770-rag-qa-system/
 
 ---
 
-# 📚 Companion Project — Contaminated Knowledge Base for LLM Testing
+# 📚 Companion Project: Contaminated Knowledge Base for LLM Testing
 
 > **Live Demo:** [adta-5760-group-4.vercel.app](https://adta-5760-group-4.vercel.app)
 
@@ -138,7 +138,7 @@ The contamination dataset directly informed our prompt-engineering and grounding
 
 ---
 
-## 👥 Team — Group 4
+## 👥 Team (Group 4)
 
 | Member | Role | Contribution Highlights |
 |---|---|---|
@@ -149,9 +149,9 @@ The contamination dataset directly informed our prompt-engineering and grounding
 
 ## 🎓 Course Information
 
-- **Institution:** University of North Texas — College of Sciences
+- **Institution:** University of North Texas, College of Sciences
 - **Program:** Master of Science in Advanced Data Analytics
-- **Instructor:** Dr. Thuan L. Nguyen, Ph.D. — Clinical Professor
+- **Instructor:** Dr. Thuan L. Nguyen, Ph.D., Clinical Professor
 - **Courses:** ADTA 5770 (Generative AI with LLMs, Spring 2026) · ADTA 5760 (NLP with Neural Networks, Fall 2025)
 
 ## 📜 License
@@ -160,4 +160,4 @@ This project is released under the [MIT License](LICENSE).
 
 ## 🔗 Connect
 
-- **Karan Parekh** — [LinkedIn](https://www.linkedin.com/in/karanparekh14) · [GitHub](https://github.com/karanparekh14) · [karanparekh14@my.unt.edu](mailto:KaranParekh@my.unt.edu)
+- **Karan Parekh**: [LinkedIn](https://www.linkedin.com/in/karanparekh14) · [GitHub](https://github.com/karanparekh14) · [karanparekh14@my.unt.edu](mailto:KaranParekh@my.unt.edu)
